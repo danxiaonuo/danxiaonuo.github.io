@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="noodp" name="robots"/>
+<meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible"/>
+<title>网络工具 iproute2 - 单小喏博客</title><meta content="网络工具 iproute2" name="Description"/><meta content="网络工具 iproute2" property="og:title"/>
+<meta content="网络工具 iproute2" property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://www.danxiaonuo.me/linux-base-iproute2/" property="og:url"/>
+<meta content="https://www.danxiaonuo.me/logo.png" property="og:image"/>
+<meta content="2020-10-01T08:00:00+08:00" property="article:published_time"/>
+<meta content="2020-10-01T08:00:00+08:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://www.danxiaonuo.me/logo.png" name="twitter:image"/>
+<meta content="网络工具 iproute2" name="twitter:title"/>
+<meta content="网络工具 iproute2" name="twitter:description"/>
+<meta content="danxiaonuo" name="application-name"/>
+<meta content="danxiaonuo" name="apple-mobile-web-app-title"/><meta content="#ffffff" name="theme-color"/><meta content="#da532c" name="msapplication-TileColor"/><link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><link color="#5bbad5" href="/safari-pinned-tab.svg" rel="mask-icon"/><link href="/site.webmanifest" rel="manifest"/><link href="https://www.danxiaonuo.me/linux-base-iproute2/" rel="canonical"/><link href="https://www.danxiaonuo.me/linux-base-choose-shell/" rel="prev"/><link href="https://www.danxiaonuo.me/linux-base-tty-shell/" rel="next"/><link href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css" rel="stylesheet"/><link href="/css/style.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css" rel="stylesheet"/><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "网络工具 iproute2",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.danxiaonuo.me\/linux-base-iproute2\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.danxiaonuo.me\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "linux基础","wordcount":  873 ,
+        "url": "https:\/\/www.danxiaonuo.me\/linux-base-iproute2\/","datePublished": "2020-10-01T08:00:00+08:00","dateModified": "2020-10-01T08:00:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "danxiaonuo","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.danxiaonuo.me\/images\/avatar.png",
+                    "width":  384 ,
+                    "height":  384 
+                }},"author": {
+                "@type": "Person",
+                "name": "单小喏"
+            },"description": "网络工具 iproute2"
+    }
+    </script></head>
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+<div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+<div class="header-wrapper">
+<div class="header-title">
+<a href="/" title="单小喏博客"><span class="header-title-pre"><i class="far fa-kiss-wink-heart fa-fw"></i></span>danxiaonuo</a>
+</div>
+<div class="menu">
+<div class="menu-inner"><a class="menu-item" href="/posts/" title="所有文章"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/danxiaonuo" rel="noopener noreffer" target="_blank" title="GitHub"><i class="fab fa-github fa-fw"></i> </a><span class="menu-item delimiter"></span><a class="menu-item language" href="javascript:void(0);" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option selected="" value="/linux-base-iproute2/">简体中文</option></select>
+</a><span class="menu-item search" id="search-desktop">
+<input id="search-input-desktop" placeholder="搜索文章标题或内容..." type="text"/>
+<a class="search-button search-toggle" href="javascript:void(0);" id="search-toggle-desktop" title="搜索">
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a class="search-button search-clear" href="javascript:void(0);" id="search-clear-desktop" title="清空">
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id="search-loading-desktop">
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a class="menu-item theme-switch" href="javascript:void(0);" title="切换主题">
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class="mobile" id="header-mobile">
+<div class="header-container">
+<div class="header-wrapper">
+<div class="header-title">
+<a href="/" title="单小喏博客"><span class="header-title-pre"><i class="far fa-kiss-wink-heart fa-fw"></i></span>danxiaonuo</a>
+</div>
+<div class="menu-toggle" id="menu-toggle-mobile">
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class="menu" id="menu-mobile"><div class="search-wrapper">
+<div class="search mobile" id="search-mobile">
+<input id="search-input-mobile" placeholder="搜索文章标题或内容..." type="text"/>
+<a class="search-button search-toggle" href="javascript:void(0);" id="search-toggle-mobile" title="搜索">
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a class="search-button search-clear" href="javascript:void(0);" id="search-clear-mobile" title="清空">
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id="search-loading-mobile">
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a class="search-cancel" href="javascript:void(0);" id="search-cancel-mobile">
+                        取消
+                    </a>
+</div><a class="menu-item" href="/posts/" title="所有文章">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/danxiaonuo" rel="noopener noreffer" target="_blank" title="GitHub"><i class="fab fa-github fa-fw"></i></a><a class="menu-item theme-switch" href="javascript:void(0);" title="切换主题">
+<i class="fas fa-adjust fa-fw"></i>
+</a><a class="menu-item" href="javascript:void(0);" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class="language-select" onchange="location = this.value;"><option selected="" value="/linux-base-iproute2/">简体中文</option></select>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+<div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+<div class="container"><div class="toc" id="toc-auto">
+<h2 class="toc-title">目录</h2>
+<div class="toc-content" id="toc-content-auto"></div>
+</div><article class="page single"><h1 class="single-title animated flipInX">网络工具 iproute2</h1><div class="post-meta">
+<div class="post-meta-line"><span class="post-author"><a class="author" href="https://www.danxiaonuo.me" rel="noopener noreffer author" target="_blank" title="Author"><i class="fas fa-user-circle fa-fw"></i>单小喏</a></span> <span class="post-category">收录于 <a href="/categories/%E7%88%B1%E6%8A%80%E6%9C%AF%E7%88%B1%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw"></i>爱技术爱折腾</a></span></div>
+<div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i> <time datetime="2020-10-01">2020-10-01</time> <i class="fas fa-pencil-alt fa-fw"></i> 约 873 字 
+                <i class="far fa-clock fa-fw"></i> 预计阅读 2 分钟 <span class="leancloud_visitors" data-flag-title="网络工具 iproute2" id="/linux-base-iproute2/">
+<i class="far fa-eye fa-fw"></i> <span class="leancloud-visitors-count"></span> 次阅读
+                    </span> </div>
+</div><div class="details toc" id="toc-static" kept="">
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#语法介绍">语法介绍</a></li>
+<li><a href="#查看系统网络信息">查看系统网络信息</a></li>
+<li><a href="#配置网络">配置网络</a></li>
+</ul>
+</nav></div>
+</div><div class="content" id="content"><p>net-tools 是一款知名的老牌网络工具。Linux kernel 2.2 开始对网络子系统进行了重新设计，老牌的网络工具难以继续与之适配。iproute2 是基于新的网络子系统开发出来的工具，可以管理路由、网络接口、隧道、流量控制以及与网络相关的设备驱动程序。</p>
+<p>下面是 iproute2 和 net-tools 相关命令的对照：</p>
+<table>
+<thead>
+<tr>
+<th>iproute2 命令</th>
+<th>net-tools 命令</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ip address</code>, <code>ip link</code></td>
+<td><code>ifconfig</code></td>
+<td>管理网络接口和地址</td>
+</tr>
+<tr>
+<td><code>ip route</code></td>
+<td><code>route</code></td>
+<td>管理路由表</td>
+</tr>
+<tr>
+<td><code>arp</code></td>
+<td><code>ip neigh</code></td>
+<td>管理 arp 表</td>
+</tr>
+<tr>
+<td><code>ss</code></td>
+<td><code>netstat</code></td>
+<td>查看网络连接信息</td>
+</tr>
+</tbody>
+</table>
+<h2 id="语法介绍">语法介绍</h2>
+<p><code>ip</code> 命令的语法如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">ip [ OPTIONS ] OBJECT { COMMAND | help }
+
+OBJECT := { link | address | addrlabel | route | rule | neigh | ntable | tunnel | tuntap | maddress | mroute | mrule | monitor | xfrm | netns | l2tp | tcp_metrics | token | macsec }
+</code></pre></td></tr></table>
+</div>
+</div><p><code>ip</code> 命令可以管理很多对象，上面已经列出来了。众多对象及其子命令要全部记住可不容易，所以 help 命令很有用，所有对象均支持 help 命令，例如 <code>ip help</code>、<code>ip link help</code>。</p>
+<p>命令中的字段可以不敲完整，例如 <code>ip address</code> 可以敲成 <code>ip addr</code>、<code>ip a</code>；而 <code>ip addrlabel</code> 至少要敲出 <code>ip addrl</code>，因为命令识别有优先级顺序。直接敲 <code>ip address</code> 后面什么都没有，会被程序识别为 <code>ip address show</code>。</p>
+<h2 id="查看系统网络信息">查看系统网络信息</h2>
+<p>查看「IP地址」、路由表和「ARP表」是最常规的需求，命令如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 查看「IP地址」</span>
+ip address
+
+<span class="c1"># 查看路由表</span>
+ip route
+
+<span class="c1"># 查看「ARP表」</span>
+ip neigh
+</code></pre></td></tr></table>
+</div>
+</div><p>执行后输出信息如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$  ip address
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 52:54:00:b6:13:16 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.121.142/24 brd 192.168.121.255 scope global dynamic eth0
+       valid_lft 2285sec preferred_lft 2285sec
+$  
+$  ip route
+default via 192.168.121.1 dev eth0 
+192.168.121.0/24 dev eth0 proto kernel scope link src 192.168.121.142 
+$  
+$  ip neigh
+192.168.121.1 dev eth0 lladdr 52:54:00💿70:3a REACHABLE
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="配置网络">配置网络</h2>
+<p>这里我们通过一个小实验简单了解一下 iproute2 如何配置网络：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$  sudo ip link add test-br type bridge
+$  sudo ip address change 10.9.2.1/24 dev test-br
+$  sudo ip link set test-br up
+$  ip address show test-br 
+96: test-br: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/ether 8a:8f:ab:0b:12:23 brd ff:ff:ff:ff:ff:ff
+    inet 10.9.2.1/24 scope global test-br
+       valid_lft forever preferred_lft forever
+$  ping -c 1 10.9.2.1
+PING 10.9.2.1 (10.9.2.1) 56(84) bytes of data.
+64 bytes from 10.9.2.1: icmp_seq=1 ttl=64 time=0.066 ms
+
+--- 10.9.2.1 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.066/0.066/0.066/0.000 ms
+$  
+$  sudo ip link del test-br
+</code></pre></td></tr></table>
+</div>
+</div><p>我们把相关的命令单独列出来：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 创建网卡</span>
+sudo ip link add test-br <span class="nb">type</span> bridge
+
+<span class="c1"># 配置「IP地址」</span>
+sudo ip address change 10.9.2.1/24 dev test-br
+
+<span class="c1"># 启动网卡并查看网卡信息</span>
+sudo ip link <span class="nb">set</span> test-br up
+ip address show test-br 
+
+<span class="c1"># 删除网卡</span>
+sudo ip link del test-br
+</code></pre></td></tr></table>
+</div>
+</div><p>上面对网卡进行增删改的操作都需要 root 权限，并且这些配置在重启后会失效。</p>
+</div><div class="post-footer" id="post-footer">
+<div class="post-info">
+<div class="post-info-line">
+<div class="post-info-mod">
+<span>更新于 2020-10-01</span>
+</div>
+<div class="post-info-license"></div>
+</div>
+<div class="post-info-line">
+<div class="post-info-md"><span>
+<a class="link-to-markdown" href="/linux-base-iproute2/index.md" target="_blank">阅读原始文档</a>
+</span></div>
+<div class="post-info-share">
+<span><a data-hashtags="linux基础" data-sharer="twitter" data-title="网络工具 iproute2" data-url="https://www.danxiaonuo.me/linux-base-iproute2/" href="javascript:void(0);" title="分享到 Twitter"><i class="fab fa-twitter fa-fw"></i></a><a data-hashtag="linux基础" data-sharer="facebook" data-url="https://www.danxiaonuo.me/linux-base-iproute2/" href="javascript:void(0);" title="分享到 Facebook"><i class="fab fa-facebook-square fa-fw"></i></a><a data-sharer="hackernews" data-title="网络工具 iproute2" data-url="https://www.danxiaonuo.me/linux-base-iproute2/" href="javascript:void(0);" title="分享到 Hacker News"><i class="fab fa-hacker-news fa-fw"></i></a><a data-sharer="line" data-title="网络工具 iproute2" data-url="https://www.danxiaonuo.me/linux-base-iproute2/" href="javascript:void(0);" title="分享到 Line"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a data-ralateuid="单小喏" data-sharer="weibo" data-title="网络工具 iproute2" data-url="https://www.danxiaonuo.me/linux-base-iproute2/" href="javascript:void(0);" title="分享到 微博"><i class="fab fa-weibo fa-fw"></i></a></span>
+</div>
+</div>
+</div>
+<div class="post-info-more">
+<section class="post-tags"><i class="fas fa-tags fa-fw"></i> <a href="/tags/linux%E5%9F%BA%E7%A1%80/">linux基础</a></section>
+<section>
+<span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span> | <span><a href="/">主页</a></span>
+</section>
+</div>
+<div class="post-nav"><a class="prev" href="/linux-base-choose-shell/" rel="prev" title="选择 shell"><i class="fas fa-angle-left fa-fw"></i>选择 shell</a>
+<a class="next" href="/linux-base-tty-shell/" rel="next" title="终端和 shell">终端和 shell<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div class="comment" id="valine"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+</main><footer class="footer">
+<div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2021</span><span class="author" itemprop="copyrightHolder"> <a href="https://www.danxiaonuo.me" target="_blank">单小喏</a></span> | <span class="license"><a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license external nofollow noopener noreffer" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+</footer></div>
+<div id="fixed-buttons"><a class="fixed-button" href="#" id="back-to-top" title="回到顶部">
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a class="fixed-button" href="#" id="view-comments" title="查看评论">
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><link href="/lib/valine/valine.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css" rel="stylesheet"/><script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js" type="text/javascript"></script><script src="/lib/lunr/lunr.stemmer.support.min.js" type="text/javascript"></script><script src="/lib/lunr/lunr.zh.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js" type="text/javascript"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"WEp2n2R9Mo9oCk4ub38YJdSE-gzGzoHsz","appKey":"rHwb7YxmQvl1ACOt3DK12qTg","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":true,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"支持 Markdown 语言, 另外, 填写邮箱后, 会第一时间收到通知邮件呦 🍀","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" type="text/javascript"></script></body>
+</html>

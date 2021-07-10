@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="noodp" name="robots"/>
+<meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible"/>
+<title>环境变量 - 单小喏博客</title><meta content="环境变量" name="Description"/><meta content="环境变量" property="og:title"/>
+<meta content="环境变量" property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://www.danxiaonuo.me/linux-base-shell-env/" property="og:url"/>
+<meta content="https://www.danxiaonuo.me/logo.png" property="og:image"/>
+<meta content="2020-10-01T08:00:00+08:00" property="article:published_time"/>
+<meta content="2020-10-01T08:00:00+08:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://www.danxiaonuo.me/logo.png" name="twitter:image"/>
+<meta content="环境变量" name="twitter:title"/>
+<meta content="环境变量" name="twitter:description"/>
+<meta content="danxiaonuo" name="application-name"/>
+<meta content="danxiaonuo" name="apple-mobile-web-app-title"/><meta content="#ffffff" name="theme-color"/><meta content="#da532c" name="msapplication-TileColor"/><link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><link color="#5bbad5" href="/safari-pinned-tab.svg" rel="mask-icon"/><link href="/site.webmanifest" rel="manifest"/><link href="https://www.danxiaonuo.me/linux-base-shell-env/" rel="canonical"/><link href="https://www.danxiaonuo.me/linux-base-user-and-group/" rel="prev"/><link href="https://www.danxiaonuo.me/linux-base-file-basic/" rel="next"/><link href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css" rel="stylesheet"/><link href="/css/style.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css" rel="stylesheet"/><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "环境变量",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.danxiaonuo.me\/linux-base-shell-env\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.danxiaonuo.me\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "linux基础","wordcount":  1607 ,
+        "url": "https:\/\/www.danxiaonuo.me\/linux-base-shell-env\/","datePublished": "2020-10-01T08:00:00+08:00","dateModified": "2020-10-01T08:00:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "danxiaonuo","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.danxiaonuo.me\/images\/avatar.png",
+                    "width":  384 ,
+                    "height":  384 
+                }},"author": {
+                "@type": "Person",
+                "name": "单小喏"
+            },"description": "环境变量"
+    }
+    </script></head>
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+<div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+<div class="header-wrapper">
+<div class="header-title">
+<a href="/" title="单小喏博客"><span class="header-title-pre"><i class="far fa-kiss-wink-heart fa-fw"></i></span>danxiaonuo</a>
+</div>
+<div class="menu">
+<div class="menu-inner"><a class="menu-item" href="/posts/" title="所有文章"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/danxiaonuo" rel="noopener noreffer" target="_blank" title="GitHub"><i class="fab fa-github fa-fw"></i> </a><span class="menu-item delimiter"></span><a class="menu-item language" href="javascript:void(0);" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option selected="" value="/linux-base-shell-env/">简体中文</option></select>
+</a><span class="menu-item search" id="search-desktop">
+<input id="search-input-desktop" placeholder="搜索文章标题或内容..." type="text"/>
+<a class="search-button search-toggle" href="javascript:void(0);" id="search-toggle-desktop" title="搜索">
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a class="search-button search-clear" href="javascript:void(0);" id="search-clear-desktop" title="清空">
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id="search-loading-desktop">
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a class="menu-item theme-switch" href="javascript:void(0);" title="切换主题">
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class="mobile" id="header-mobile">
+<div class="header-container">
+<div class="header-wrapper">
+<div class="header-title">
+<a href="/" title="单小喏博客"><span class="header-title-pre"><i class="far fa-kiss-wink-heart fa-fw"></i></span>danxiaonuo</a>
+</div>
+<div class="menu-toggle" id="menu-toggle-mobile">
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class="menu" id="menu-mobile"><div class="search-wrapper">
+<div class="search mobile" id="search-mobile">
+<input id="search-input-mobile" placeholder="搜索文章标题或内容..." type="text"/>
+<a class="search-button search-toggle" href="javascript:void(0);" id="search-toggle-mobile" title="搜索">
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a class="search-button search-clear" href="javascript:void(0);" id="search-clear-mobile" title="清空">
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id="search-loading-mobile">
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a class="search-cancel" href="javascript:void(0);" id="search-cancel-mobile">
+                        取消
+                    </a>
+</div><a class="menu-item" href="/posts/" title="所有文章">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/danxiaonuo" rel="noopener noreffer" target="_blank" title="GitHub"><i class="fab fa-github fa-fw"></i></a><a class="menu-item theme-switch" href="javascript:void(0);" title="切换主题">
+<i class="fas fa-adjust fa-fw"></i>
+</a><a class="menu-item" href="javascript:void(0);" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class="language-select" onchange="location = this.value;"><option selected="" value="/linux-base-shell-env/">简体中文</option></select>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+<div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+<div class="container"><div class="toc" id="toc-auto">
+<h2 class="toc-title">目录</h2>
+<div class="toc-content" id="toc-content-auto"></div>
+</div><article class="page single"><h1 class="single-title animated flipInX">环境变量</h1><div class="post-meta">
+<div class="post-meta-line"><span class="post-author"><a class="author" href="https://www.danxiaonuo.me" rel="noopener noreffer author" target="_blank" title="Author"><i class="fas fa-user-circle fa-fw"></i>单小喏</a></span> <span class="post-category">收录于 <a href="/categories/%E7%88%B1%E6%8A%80%E6%9C%AF%E7%88%B1%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw"></i>爱技术爱折腾</a></span></div>
+<div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i> <time datetime="2020-10-01">2020-10-01</time> <i class="fas fa-pencil-alt fa-fw"></i> 约 1607 字 
+                <i class="far fa-clock fa-fw"></i> 预计阅读 4 分钟 <span class="leancloud_visitors" data-flag-title="环境变量" id="/linux-base-shell-env/">
+<i class="far fa-eye fa-fw"></i> <span class="leancloud-visitors-count"></span> 次阅读
+                    </span> </div>
+</div><div class="details toc" id="toc-static" kept="">
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#全局环境变量局部环境变量">全局环境变量/局部环境变量</a></li>
+<li><a href="#profile">profile</a>
+<ul>
+<li><a href="#etcprofiled">/etc/profile.d</a></li>
+</ul>
+</li>
+<li><a href="#path">$PATH</a></li>
+<li><a href="#何时加--符号">何时加 $ 符号</a></li>
+</ul>
+</nav></div>
+</div><div class="content" id="content"><p>我们先通过实际操作来看看一些系统环境变量：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$  echo $SHELL
+/bin/bash
+$  
+$  echo $USER
+linux-20
+$  
+$  echo $HOME
+/home/linux-20
+$  
+$  echo $PATH
+/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/local/go/bin:/usr/local/nodejs/bin:/home/linux-20/go/bin:/home/linux-20/.local/bin
+$  
+$  printenv LANG
+en_US.UTF-8
+</code></pre></td></tr></table>
+</div>
+</div><p><code>echo $VAR</code> 可查看所有环境变量，<code>printenv VAR</code> 只可查看全局环境变量。</p>
+<p>调用变量使用 <code>$</code> 加变量名，比如 <code>$USER</code>、<code>$PATH</code>，更规范的书写方式是 <code>${USER}</code>、<code>${PATH}</code>。我们通过一个例子看看两者的区别：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$  echo $USER
+linux-20
+$  
+$  echo $USER_book
+
+$  echo ${USER}_book
+linux-20_book
+</code></pre></td></tr></table>
+</div>
+</div><p><code>$USER_book</code> 这个变量是不存在的，我们需要将 <code>_book</code> 作为普通字串放到 <code>$USER</code> 后面组成新的字串，此时必须书写为 <code>${USER}_book</code>。</p>
+<p>可以看到，加大括号的书写方式比较清晰，而且能够明确界定变量字串和普通字串。</p>
+<h2 id="全局环境变量局部环境变量">全局环境变量/局部环境变量</h2>
+<p>环境变量有两种，「全局环境变量」和「局部环境变量」。全局变量对当前 shell 及子 shell 有效，局部变量仅对当前 shell 有效。</p>
+<p><code>foo=bar</code> 即定义了局部环境变量 <code>foo</code>，它的值是 <code>bar</code>。定义全局环境变量，<code>foo=bar; export foo</code> (可以将多行命令写在一行，用分号隔开) 或者 <code>export foo=bar</code>。请看下面的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$  # 定义局部环境变量
+$  foo=bar
+$  echo $foo
+bar
+$  # 启动一个 bash 子进程，局部环境变量不会传递
+$  bash
+$  echo $foo
+
+$  # 定义全局环境变量
+$  export foo=bar
+$  echo $foo
+bar
+$  # 再启动一个 bash 子进程，全局环境变量继续可用
+$  bash
+$  echo $foo
+bar
+$  # 退出 bash 子进程，回到初始 bash
+$  exit
+exit
+$  exit
+exit
+</code></pre></td></tr></table>
+</div>
+</div><p><code>env</code> 或者 <code>printenv</code> 可输出所有全局环境变量，<code>set</code> 可输出所有环境变量 (输出结果会很长)。<code>unset VAR</code> 可删除环境变量。</p>
+<h2 id="profile">profile</h2>
+<p>退出 bash 进程后，该进程运行时定义的环境变量也就不存在了。定义永久的环境变量则需要保存到相应的配置文件，此配置文件也称 profile。</p>
+<p>profile 有系统级的和用户级的，系统级的 profile 是 <code>/etc/profile</code>，用户级的 profile 通常是 <code>~/.profile</code> (<code>~</code> 表示当前用户的 home 目录)。</p>
+<p>当启动交互式的登录 bash，首先加载系统 profile，然后加载用户 profile。用户 profile 是 <code>~/.bash_profile</code> <code>~/.bash_login</code> <code>~/.profile</code> 这三个文件中的一个，按顺序读取，首先读取成功的有效。因此这三个文件有一个就可以，建议使用 <code>~/.profile</code>，除了 bash 它还被其他多种 shell 程序支持。</p>
+<p>用户 profile 中有这样的脚本：<code>if [ -f ~/.bashrc ]; then . ~/.bashrc; fi</code>，意思是如果 <code>~/.bashrc</code> 文件存在，则执行它。这段脚本默认是有的，可别轻易删除了。</p>
+<h3 id="etcprofiled">/etc/profile.d</h3>
+<p><code>/etc/profile</code> 有如下配置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="k">if</span> <span class="o">[</span> -d /etc/profile.d <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="k">for</span> i in /etc/profile.d/*.sh<span class="p">;</span> <span class="k">do</span>
+    <span class="k">if</span> <span class="o">[</span> -r <span class="nv">$i</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+      . <span class="nv">$i</span>
+    <span class="k">fi</span>
+  <span class="k">done</span>
+  <span class="nb">unset</span> i
+<span class="k">fi</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这一段的作用是 <code>/etc/profile.d</code> 这个目录下所有以 <code>.sh</code> 结尾的文件都将作为系统 profile 加载。因此用户可以创建一个 <code>/etc/profile.d/local.sh</code> 文件，作为系统级的 profile 文件，这样管理会更加清晰。</p>
+<h2 id="path">$PATH</h2>
+<p><code>$PATH</code> 是非常重要的一个变量，当我们敲一个命令，系统会在 <code>$PATH</code> 定义的路径下搜索可执行文件。</p>
+<p><code>$PATH</code> 的值像这样 <code>/home/linux-20/bin:/usr/local/bin:/usr/bin:/bin</code>，多个路径用 <code>:</code> 隔开。执行命令时从左到右搜索，左边的优先级高。将用户的目录放前面，使得用户目录的程序比系统目录的程序优先执行。</p>
+<p>我们使用的 <code>ls</code> <code>env</code> 等命令，它们完整的路径是 <code>/bin/ls</code> <code>/usr/bin/env</code>，错误配置 <code>$PATH</code> 将带来严重的后果，请看下面的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$  # 启动一个 bash 子进程
+$  bash
+$  echo $PATH
+/home/linux-20/bin:/usr/local/bin:/usr/bin:/bin
+$  
+$  # which 可以查看命令匹配到的可执行文件
+$  which ls
+/bin/ls
+$  which env
+/usr/bin/env
+$  which which
+/usr/bin/which
+$  
+$  # 重新配置 PATH
+$  export PATH="/usr/bin"
+$  which ls
+$  which env
+/usr/bin/env
+$  ls
+bash: ls: command not found
+$  
+$  # PATH 添加目录
+$  export PATH=$PATH:/bin
+$  echo $PATH
+/usr/bin:/bin
+$  which ls
+/bin/ls
+$  
+$  # 删除 PATH
+$  unset PATH
+$  which env
+bash: which: No such file or directory
+$  
+$  # 退出 bash 子进程
+$  exit
+exit
+$  # 父进程不受影响
+$  echo $PATH
+/home/linux-20/bin:/usr/local/bin:/usr/bin:/bin
+</code></pre></td></tr></table>
+</div>
+</div><p>有些 Linux 程序提供二进制程序包，安装时只需下载并解压，然后配置 <code>$PATH</code> 即可。</p>
+<p>比如安装 nodejs，通常的做法是将其二进制程序包解压到 <code>/usr/local/nodejs</code> 目录，然后在系统 profile 中加入一行 <code>export PATH=/usr/local/nodejs/bin:$PATH</code>。要在 <code>$PATH</code> 中增加目录，推荐这样操作：<code>export PATH=/newpath:$PATH</code> <code>export PATH=$PATH:/newpath</code>。</p>
+<h2 id="何时加--符号">何时加 $ 符号</h2>
+<p>调用环境变量时需要加 <code>$</code> 符号，配置环境变量时则不需要。<code>export PATH=/newpath:$PATH</code> 中，前面的 PATH 表示定义一个环境变量，后面的 <code>$PATH</code> 表示调用已有的环境变量。</p>
+</div><div class="post-footer" id="post-footer">
+<div class="post-info">
+<div class="post-info-line">
+<div class="post-info-mod">
+<span>更新于 2020-10-01</span>
+</div>
+<div class="post-info-license"></div>
+</div>
+<div class="post-info-line">
+<div class="post-info-md"><span>
+<a class="link-to-markdown" href="/linux-base-shell-env/index.md" target="_blank">阅读原始文档</a>
+</span></div>
+<div class="post-info-share">
+<span><a data-hashtags="linux基础" data-sharer="twitter" data-title="环境变量" data-url="https://www.danxiaonuo.me/linux-base-shell-env/" href="javascript:void(0);" title="分享到 Twitter"><i class="fab fa-twitter fa-fw"></i></a><a data-hashtag="linux基础" data-sharer="facebook" data-url="https://www.danxiaonuo.me/linux-base-shell-env/" href="javascript:void(0);" title="分享到 Facebook"><i class="fab fa-facebook-square fa-fw"></i></a><a data-sharer="hackernews" data-title="环境变量" data-url="https://www.danxiaonuo.me/linux-base-shell-env/" href="javascript:void(0);" title="分享到 Hacker News"><i class="fab fa-hacker-news fa-fw"></i></a><a data-sharer="line" data-title="环境变量" data-url="https://www.danxiaonuo.me/linux-base-shell-env/" href="javascript:void(0);" title="分享到 Line"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a data-ralateuid="单小喏" data-sharer="weibo" data-title="环境变量" data-url="https://www.danxiaonuo.me/linux-base-shell-env/" href="javascript:void(0);" title="分享到 微博"><i class="fab fa-weibo fa-fw"></i></a></span>
+</div>
+</div>
+</div>
+<div class="post-info-more">
+<section class="post-tags"><i class="fas fa-tags fa-fw"></i> <a href="/tags/linux%E5%9F%BA%E7%A1%80/">linux基础</a></section>
+<section>
+<span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span> | <span><a href="/">主页</a></span>
+</section>
+</div>
+<div class="post-nav"><a class="prev" href="/linux-base-user-and-group/" rel="prev" title="管理用户和组"><i class="fas fa-angle-left fa-fw"></i>管理用户和组</a>
+<a class="next" href="/linux-base-file-basic/" rel="next" title="文件权限基础">文件权限基础<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div class="comment" id="valine"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+</main><footer class="footer">
+<div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2021</span><span class="author" itemprop="copyrightHolder"> <a href="https://www.danxiaonuo.me" target="_blank">单小喏</a></span> | <span class="license"><a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license external nofollow noopener noreffer" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+</footer></div>
+<div id="fixed-buttons"><a class="fixed-button" href="#" id="back-to-top" title="回到顶部">
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a class="fixed-button" href="#" id="view-comments" title="查看评论">
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><link href="/lib/valine/valine.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css" rel="stylesheet"/><script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js" type="text/javascript"></script><script src="/lib/lunr/lunr.stemmer.support.min.js" type="text/javascript"></script><script src="/lib/lunr/lunr.zh.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js" type="text/javascript"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"WEp2n2R9Mo9oCk4ub38YJdSE-gzGzoHsz","appKey":"rHwb7YxmQvl1ACOt3DK12qTg","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":true,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"支持 Markdown 语言, 另外, 填写邮箱后, 会第一时间收到通知邮件呦 🍀","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" type="text/javascript"></script></body>
+</html>

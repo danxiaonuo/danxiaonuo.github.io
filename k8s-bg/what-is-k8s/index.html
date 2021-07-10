@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="noodp" name="robots"/>
+<meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible"/>
+<title>Kubernetes介绍 - 单小喏博客</title><meta content="介绍Kubernetes是什么" name="Description"/><meta content="Kubernetes介绍" property="og:title"/>
+<meta content="介绍Kubernetes是什么" property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://www.danxiaonuo.me/k8s-bg/what-is-k8s/" property="og:url"/>
+<meta content="https://www.danxiaonuo.me/logo.png" property="og:image"/>
+<meta content="2020-11-05T08:00:00+08:00" property="article:published_time"/>
+<meta content="2020-11-05T08:00:00+08:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://www.danxiaonuo.me/logo.png" name="twitter:image"/>
+<meta content="Kubernetes介绍" name="twitter:title"/>
+<meta content="介绍Kubernetes是什么" name="twitter:description"/>
+<meta content="danxiaonuo" name="application-name"/>
+<meta content="danxiaonuo" name="apple-mobile-web-app-title"/><meta content="#ffffff" name="theme-color"/><meta content="#da532c" name="msapplication-TileColor"/><link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><link color="#5bbad5" href="/safari-pinned-tab.svg" rel="mask-icon"/><link href="/site.webmanifest" rel="manifest"/><link href="https://www.danxiaonuo.me/k8s-bg/what-is-k8s/" rel="canonical"/><link href="https://www.danxiaonuo.me/k8s-bg/component/" rel="prev"/><link href="https://www.danxiaonuo.me/uola_docker/" rel="next"/><link href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css" rel="stylesheet"/><link href="/css/style.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css" rel="stylesheet"/><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Kubernetes介绍",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.danxiaonuo.me\/k8s-bg\/what-is-k8s\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.danxiaonuo.me\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "k8s, Kubernetes 介绍","wordcount":  3193 ,
+        "url": "https:\/\/www.danxiaonuo.me\/k8s-bg\/what-is-k8s\/","datePublished": "2020-11-05T08:00:00+08:00","dateModified": "2020-11-05T08:00:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "danxiaonuo","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.danxiaonuo.me\/images\/avatar.png",
+                    "width":  384 ,
+                    "height":  384 
+                }},"author": {
+                "@type": "Person",
+                "name": "单小喏"
+            },"description": "介绍Kubernetes是什么"
+    }
+    </script></head>
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+<div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+<div class="header-wrapper">
+<div class="header-title">
+<a href="/" title="单小喏博客"><span class="header-title-pre"><i class="far fa-kiss-wink-heart fa-fw"></i></span>danxiaonuo</a>
+</div>
+<div class="menu">
+<div class="menu-inner"><a class="menu-item" href="/posts/" title="所有文章"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/danxiaonuo" rel="noopener noreffer" target="_blank" title="GitHub"><i class="fab fa-github fa-fw"></i> </a><span class="menu-item delimiter"></span><a class="menu-item language" href="javascript:void(0);" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option selected="" value="/k8s-bg/what-is-k8s/">简体中文</option></select>
+</a><span class="menu-item search" id="search-desktop">
+<input id="search-input-desktop" placeholder="搜索文章标题或内容..." type="text"/>
+<a class="search-button search-toggle" href="javascript:void(0);" id="search-toggle-desktop" title="搜索">
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a class="search-button search-clear" href="javascript:void(0);" id="search-clear-desktop" title="清空">
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id="search-loading-desktop">
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a class="menu-item theme-switch" href="javascript:void(0);" title="切换主题">
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class="mobile" id="header-mobile">
+<div class="header-container">
+<div class="header-wrapper">
+<div class="header-title">
+<a href="/" title="单小喏博客"><span class="header-title-pre"><i class="far fa-kiss-wink-heart fa-fw"></i></span>danxiaonuo</a>
+</div>
+<div class="menu-toggle" id="menu-toggle-mobile">
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class="menu" id="menu-mobile"><div class="search-wrapper">
+<div class="search mobile" id="search-mobile">
+<input id="search-input-mobile" placeholder="搜索文章标题或内容..." type="text"/>
+<a class="search-button search-toggle" href="javascript:void(0);" id="search-toggle-mobile" title="搜索">
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a class="search-button search-clear" href="javascript:void(0);" id="search-clear-mobile" title="清空">
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id="search-loading-mobile">
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a class="search-cancel" href="javascript:void(0);" id="search-cancel-mobile">
+                        取消
+                    </a>
+</div><a class="menu-item" href="/posts/" title="所有文章">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/danxiaonuo" rel="noopener noreffer" target="_blank" title="GitHub"><i class="fab fa-github fa-fw"></i></a><a class="menu-item theme-switch" href="javascript:void(0);" title="切换主题">
+<i class="fas fa-adjust fa-fw"></i>
+</a><a class="menu-item" href="javascript:void(0);" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class="language-select" onchange="location = this.value;"><option selected="" value="/k8s-bg/what-is-k8s/">简体中文</option></select>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+<div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+<div class="container"><div class="toc" id="toc-auto">
+<h2 class="toc-title">目录</h2>
+<div class="toc-content" id="toc-content-auto"></div>
+</div><article class="page single"><h1 class="single-title animated flipInX">Kubernetes介绍</h1><div class="post-meta">
+<div class="post-meta-line"><span class="post-author"><a class="author" href="https://www.danxiaonuo.me" rel="noopener noreffer author" target="_blank" title="Author"><i class="fas fa-user-circle fa-fw"></i>单小喏</a></span> <span class="post-category">收录于 <a href="/categories/%E7%88%B1%E6%8A%80%E6%9C%AF%E7%88%B1%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw"></i>爱技术爱折腾</a></span></div>
+<div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i> <time datetime="2020-11-05">2020-11-05</time> <i class="fas fa-pencil-alt fa-fw"></i> 约 3193 字 
+                <i class="far fa-clock fa-fw"></i> 预计阅读 7 分钟 <span class="leancloud_visitors" data-flag-title="Kubernetes介绍" id="/k8s-bg/what-is-k8s/">
+<i class="far fa-eye fa-fw"></i> <span class="leancloud-visitors-count"></span> 次阅读
+                    </span> </div>
+</div><div class="details toc" id="toc-static" kept="">
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#回顾">回顾</a></li>
+<li><a href="#kubernetes的功能">Kubernetes的功能</a></li>
+<li><a href="#kubernetes的边界">Kubernetes的边界</a></li>
+</ul>
+</nav></div>
+</div><div class="content" id="content"><adsensetitle></adsensetitle>
+<blockquote>
+<p>参考文档： <a href="https://kubernetes.io/zh/docs/concepts/overview/what-is-kubernetes/" rel="noopener noreffer" target="_blank">Kubernetes 是什么</a>，并有所改写。</p>
+</blockquote>
+<p>Kubernetes是一个可以移植、可扩展的开源平台，使用 <a href="/k8s-intermediate/workload/wl-deployment/#deployment-%e6%a6%82%e8%bf%b0" rel="">声明式的配置</a> 并依据配置信息自动地执行容器化应用程序的管理。在所有的容器编排工具中（类似的还有 docker swarm / mesos等），Kubernetes的生态系统更大、增长更快，有更多的支持、服务和工具可供用户选择。</p>
+<p>Kubernetes的名字起源于希腊语，含义是 <code>舵手</code>、<code>领航员</code>、<code>向导</code>。Google于2014年将Brog系统开源为Kubernetes。Kubernetes构建在Google Brog <a href="https://ai.google/research/pubs/pub43438" rel="noopener noreffer" target="_blank">十五年运行大规模分布式系统的经验</a> 基础之上，并结合了开源社区最好的想法和实践。</p>
+<p>以下是使用 google trends 对比 <code>kubernetes</code> 、 <code>docker swarm</code>、 <code>mesos</code> 三个关键词的截图。</p>
+<p><img alt="https://cdn.jsdelivr.net/gh/danxiaonuo/blog_resource@main/images/k8s/what-is-k8s/image-20191005103155435.png" class="lazyload" data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/danxiaonuo/blog_resource@main/images/k8s/what-is-k8s/image-20191005103155435.png" data-srcset="https://cdn.jsdelivr.net/gh/danxiaonuo/blog_resource@main/images/k8s/what-is-k8s/image-20191005103155435.png, https://cdn.jsdelivr.net/gh/danxiaonuo/blog_resource@main/images/k8s/what-is-k8s/image-20191005103155435.png 1.5x, https://cdn.jsdelivr.net/gh/danxiaonuo/blog_resource@main/images/k8s/what-is-k8s/image-20191005103155435.png 2x" src="/svg/loading.min.svg" title="Kubernetes教程_Google_Trends_Kubernetes"/></p>
+<h2 id="回顾">回顾</h2>
+<p>为了理解Kubernetes的用处，我们先回顾一下历史。</p>
+<p><img alt="https://cdn.jsdelivr.net/gh/danxiaonuo/blog_resource@main/images/k8s/what-is-k8s/container_evolution.svg" class="lazyload" data-sizes="auto" data-src="https://cdn.jsdelivr.net/gh/danxiaonuo/blog_resource@main/images/k8s/what-is-k8s/container_evolution.svg" data-srcset="https://cdn.jsdelivr.net/gh/danxiaonuo/blog_resource@main/images/k8s/what-is-k8s/container_evolution.svg, https://cdn.jsdelivr.net/gh/danxiaonuo/blog_resource@main/images/k8s/what-is-k8s/container_evolution.svg 1.5x, https://cdn.jsdelivr.net/gh/danxiaonuo/blog_resource@main/images/k8s/what-is-k8s/container_evolution.svg 2x" src="/svg/loading.min.svg" title="Kubernetes教程_部署方式演化"/></p>
+<p>大致来说，在部署应用程序的方式上，我们主要经历了三个时代：</p>
+<ul>
+<li><strong>传统部署时代</strong>：早期，企业直接将应用程序部署在物理机上。由于物理机上不能为应用程序定义资源使用边界，我们也就很难合理地分配计算资源。例如：如果多个应用程序运行在同一台物理机上，可能发生这样的情况：其中的一个应用程序消耗了大多数的计算资源，导致其他应用程序不能正常运行。应对此问题的一种解决办法是，将每一个应用程序运行在不同的物理机上。然而，这种做法无法大规模实施，因为资源利用率很低，且企业维护更多物理机的成本昂贵。</li>
+<li><strong>虚拟化部署时代</strong>：针对上述问题，虚拟化技术应运而生。用户可以在单台物理机的CPU上运行多个虚拟机（Virtual Machine）。
+<ul>
+<li>虚拟化技术使得应用程序被虚拟机相互分隔开，限制了应用程序之间的非法访问，进而提供了一定程度的安全性。</li>
+<li>虚拟化技术提高了物理机的资源利用率，可以更容易地安装或更新应用程序，降低了硬件成本，因此可以更好地规模化实施。</li>
+<li>每一个虚拟机可以认为是被虚拟化的物理机之上的一台完整的机器，其中运行了一台机器的所有组件，包括虚拟机自身的操作系统。</li>
+</ul>
+</li>
+<li><strong>容器化部署时代</strong>：容器与虚拟机类似，但是降低了隔离层级，共享了操作系统。因此，容器可以认为是轻量级的。
+<ul>
+<li>与虚拟机相似，每个容器拥有自己的文件系统、CPU、内存、进程空间等</li>
+<li>运行应用程序所需要的资源都被容器包装，并和底层基础架构解耦</li>
+<li>容器化的应用程序可以跨云服务商、跨Linux操作系统发行版进行部署</li>
+</ul>
+</li>
+</ul>
+<p>容器化越来越流行，主要原因是它带来的诸多好处：</p>
+<ul>
+<li><strong>敏捷地创建和部署应用程序</strong>：相较于创建虚拟机镜像，创建容器镜像更加容易和快速</li>
+<li>持续构建集成：可以更快更频繁地构建容器镜像、部署容器化的应用程序、并且轻松地回滚应用程序</li>
+<li><strong>分离开发和运维的关注点</strong>：在开发构建阶段就完成容器镜像的构建，构建好的镜像可以部署到多种基础设施上。这种做法将开发阶段需要关注的内容包含在如何构建容器镜像的过程中，将部署阶段需要关注的内容聚焦在如何提供基础设施以及如何使用容器镜像的过程中。降低了开发和运维的耦合度</li>
+<li><strong>可监控性</strong>：不仅可以查看操作系统级别的资源监控信息，还可以查看应用程序健康状态以及其他信号的监控信息</li>
+<li><strong>开发、测试、生产不同阶段的环境一致性</strong>：开发阶段在笔记本上运行的容器与测试、生产环境中运行的容器一致</li>
+<li><strong>跨云服务商、跨操作系统发行版的可移植性</strong>：容器可运行在 Ubuntu、RHEL、CoreOS、CentOS等不同的操作系统发行版上，可以运行在私有化部署、Google Kubernetes Engine、AWS、阿里云等不同的云供应商的环境中</li>
+<li><strong>以应用程序为中心的管理</strong>：虚拟机时代的考虑的问题是在虚拟硬件上运行一个操作系统，而容器化时代，问题的焦点则是在操作系统的逻辑资源上运行一个应用程序</li>
+<li><strong>松耦合、分布式、弹性、无约束的微服务</strong>：应用程序被切分成更小的、独立的微服务，并可以动态部署和管理，而不是一个部署在专属机器上的庞大的单片应用程序</li>
+<li><strong>资源隔离</strong>：确保应用程序性能不受干扰</li>
+<li><strong>资源利用</strong>：资源高效、高密度利用</li>
+</ul>
+<h2 id="kubernetes的功能">Kubernetes的功能</h2>
+<p>容器是一个非常好的打包并运行应用程序的方式。在生产环境中，您需要管理容器化应用程序，并且确保其不停机地连续运行。例如：一个容器故障停机，另外一个容器需要立刻启动以替补停机的容器。类似的这种对容器的管理动作由系统来执行会更好更快速。</p>
+<p>Kubernetes针对此类问题，提供了容器化编排解决方案，可以使你非常健壮地运行分布式系统。Kubernetes可以处理应用程序的伸缩、failover、部署模式等多种需求。例如，Kubernetes可以轻易地管理系统的金丝雀发布（灰度发布）。</p>
+<p>Kubernetes提供的特性有：</p>
+<ul>
+<li>
+<p><strong>服务发现和负载均衡</strong></p>
+<p>Kubernetes 可以通过 DNS 名称或 IP 地址暴露容器的访问方式。并且可以在同组容器内分发负载以实现负载均衡</p>
+</li>
+<li>
+<p><strong>存储编排</strong></p>
+<p>Kubernetes可以自动挂载指定的存储系统，例如 local stroage/nfs/云存储等</p>
+</li>
+<li>
+<p><strong>自动发布和回滚</strong></p>
+<p>您可以在 Kubernetes 中声明您期望应用程序容器应该达到的状态，Kubernetes将以合适的速率调整容器的实际状态，并逐步达到最终期望的结果。请参考 <a href="/k8s-intermediate/workload/wl-deployment/#deployment-%e6%a6%82%e8%bf%b0" rel="">声明式的配置</a></p>
+</li>
+<li>
+<p><strong>自愈</strong></p>
+<p>Kubernetes提供如下自愈能力：</p>
+<ul>
+<li>重启已经停机的容器</li>
+<li>替换、kill 那些不满足自定义健康检查条件的容器</li>
+<li>在容器就绪之前，避免调用者发现该容器</li>
+</ul>
+</li>
+<li>
+<p><strong>密钥及配置管理</strong></p>
+<p>Kubernetes可以存储和管理敏感信息（例如，密码、OAuth token、ssh密钥等）。您可以更新容器应用程序的密钥、配置等信息，而无需：</p>
+<ul>
+<li>重新构建容器的镜像</li>
+<li>在不合适的地方暴露密码信息</li>
+</ul>
+</li>
+</ul>
+<h2 id="kubernetes的边界">Kubernetes的边界</h2>
+<p>Kubernetes不是一个传统意义的、保罗万象的 PaaS（Platform as a Service）系统。Kubernetes在容器层面工作，而不是硬件层面，它提供了与 PaaS 平台相似的通用特性，例如：部署、伸缩、负载均衡、日志、监控等。然而，Kubernetes并不是一个单一整体，这些特性都是可选、可插拔的。Kubernetes提供用于搭建开发平台的基础模块，同时为用户提供了不同模块的选择性和多样性。</p>
+<p>Kubernetes：</p>
+<ul>
+<li>不限制应用程序的类型。Kubernetes的目标是广泛支持不同类型的工作负载，包括：有状态、无状态、数据处理等类型的应用。只要应用可以在容器中运行，就能够非常好地在 Kubernetes 上运行</li>
+<li>不部署源码、不编译或构建应用程序。持续集成、分发、部署（CI/CD）的工作流极大程度上取决于组织的文化、偏好以及技术要求。Kubernetes可以作为部署平台参与到 CI/CD 流程，但是不涉及镜像构建和分发的过程
+<blockquote>
+<p>译者注：可选的有 Jenkins / Gitlab Runner / docker registry / harbour 等</p>
+</blockquote>
+</li>
+<li>不提供应用程序级别的服务，包括：中间件（例如，消息总线）、数据处理框架（例如，Spark）、数据库（例如，mysql）、缓存（例如，Redis），或者分布式存储（例如，Ceph）。此类组件可以在 Kubernetes 上运行，或者可以被运行在 Kubernetes 上的应用程序访问</li>
+<li>不限定日志、监控、报警的解决方案。Kubernetes 提供一些样例展示如何与日志、监控、报警等组件集成，同时提供收集、导出监控度量（metrics）的一套机制。您可以根据自己的需要选择日志、监控、报警组件
+<blockquote>
+<p>译者注：可选的有 ELK / Prometheus / Graphana / Pinpoint / Skywalking / Metrics Server 等</p>
+</blockquote>
+</li>
+<li>不提供或者限定配置语言（例如，jsonnet）。Kubernetes提供一组声明式的 API，您可以按照自己的方式定义部署信息。
+<blockquote>
+<p>译者注：可选的有 helm/kustomize/kubectl/kubernetes dashboard/kuboard/octant/k9s 等</p>
+</blockquote>
+</li>
+<li>不提供或限定任何机器的配置、维护、管理或自愈的系统。
+<blockquote>
+<p>译者注：在这个级别上，可选的组件有 puppet、ansible、open stack 等</p>
+</blockquote>
+</li>
+<li>此外，Kubernetes不是一个纯粹意义上的容器编排系统。事实上，Kubernetes 消除了容器编排的需求。容器编排的技术定义是<code>预定义流程的执行</code>（先做A、再做B、然后做C）。与此相对应，Kubernetes构建了一系列相互独立、可预排的控制过程，以持续不断地将系统从当前状态调整到声明的目标状态。如何从 A 达到 C，并不重要。集中化的控制也就不需要了。这个设计思想使得Kubernetes使用更简单、更强大、稳健、反脆弱和可扩展。</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+<div class="post-info">
+<div class="post-info-line">
+<div class="post-info-mod">
+<span>更新于 2020-11-05</span>
+</div>
+<div class="post-info-license"></div>
+</div>
+<div class="post-info-line">
+<div class="post-info-md"><span>
+<a class="link-to-markdown" href="/k8s-bg/what-is-k8s/index.md" target="_blank">阅读原始文档</a>
+</span></div>
+<div class="post-info-share">
+<span><a data-hashtags="k8s,Kubernetes 介绍" data-sharer="twitter" data-title="Kubernetes介绍" data-url="https://www.danxiaonuo.me/k8s-bg/what-is-k8s/" href="javascript:void(0);" title="分享到 Twitter"><i class="fab fa-twitter fa-fw"></i></a><a data-hashtag="k8s" data-sharer="facebook" data-url="https://www.danxiaonuo.me/k8s-bg/what-is-k8s/" href="javascript:void(0);" title="分享到 Facebook"><i class="fab fa-facebook-square fa-fw"></i></a><a data-sharer="hackernews" data-title="Kubernetes介绍" data-url="https://www.danxiaonuo.me/k8s-bg/what-is-k8s/" href="javascript:void(0);" title="分享到 Hacker News"><i class="fab fa-hacker-news fa-fw"></i></a><a data-sharer="line" data-title="Kubernetes介绍" data-url="https://www.danxiaonuo.me/k8s-bg/what-is-k8s/" href="javascript:void(0);" title="分享到 Line"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a data-ralateuid="单小喏" data-sharer="weibo" data-title="Kubernetes介绍" data-url="https://www.danxiaonuo.me/k8s-bg/what-is-k8s/" href="javascript:void(0);" title="分享到 微博"><i class="fab fa-weibo fa-fw"></i></a></span>
+</div>
+</div>
+</div>
+<div class="post-info-more">
+<section class="post-tags"><i class="fas fa-tags fa-fw"></i> <a href="/tags/k8s/">k8s</a>, <a href="/tags/kubernetes-%E4%BB%8B%E7%BB%8D/">Kubernetes 介绍</a></section>
+<section>
+<span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span> | <span><a href="/">主页</a></span>
+</section>
+</div>
+<div class="post-nav"><a class="prev" href="/k8s-bg/component/" rel="prev" title="Kubernetes组件"><i class="fas fa-angle-left fa-fw"></i>Kubernetes组件</a>
+<a class="next" href="/uola_docker/" rel="next" title="uola_docker">uola_docker<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div class="comment" id="valine"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+</main><footer class="footer">
+<div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2021</span><span class="author" itemprop="copyrightHolder"> <a href="https://www.danxiaonuo.me" target="_blank">单小喏</a></span> | <span class="license"><a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license external nofollow noopener noreffer" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+</footer></div>
+<div id="fixed-buttons"><a class="fixed-button" href="#" id="back-to-top" title="回到顶部">
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a class="fixed-button" href="#" id="view-comments" title="查看评论">
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><link href="/lib/valine/valine.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css" rel="stylesheet"/><script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js" type="text/javascript"></script><script src="/lib/lunr/lunr.stemmer.support.min.js" type="text/javascript"></script><script src="/lib/lunr/lunr.zh.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js" type="text/javascript"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"WEp2n2R9Mo9oCk4ub38YJdSE-gzGzoHsz","appKey":"rHwb7YxmQvl1ACOt3DK12qTg","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":true,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"支持 Markdown 语言, 另外, 填写邮箱后, 会第一时间收到通知邮件呦 🍀","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" type="text/javascript"></script></body>
+</html>

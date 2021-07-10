@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>content - Balise - 单小喏博客</title>
+        <link>https://www.danxiaonuo.me/fr/tags/content/</link>
+        <description>content - Balise - 单小喏博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>fr</language><managingEditor>danxiaonuo@danxiaonuo.me (单小喏)</managingEditor>
+            <webMaster>danxiaonuo@danxiaonuo.me (单小喏)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 05 Mar 2020 16:30:05 &#43;0800</lastBuildDate><atom:link href="https://www.danxiaonuo.me/fr/tags/content/" rel="self" type="application/rss+xml" /><item>
+    <title>Thème Documentation - Contenu</title>
+    <link>https://www.danxiaonuo.me/fr/th%C3%A8me-documentation-contenu/</link>
+    <pubDate>Thu, 05 Mar 2020 16:30:05 &#43;0800</pubDate>
+    <author>Auteur</author>
+    <guid>https://www.danxiaonuo.me/fr/th%C3%A8me-documentation-contenu/</guid>
+    <description><![CDATA[<p>Découvrez comment créer et organiser votre contenu rapidement et intuitivement dans le thème <strong>LoveIt</strong>.</p>]]></description>
+</item></channel>
+</rss>

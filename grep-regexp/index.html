@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="noodp" name="robots"/>
+<title>grep 与正则表达式 - 单小喏博客</title><meta content="grep 与正则表达式" name="description"/><meta content="grep 与正则表达式" property="og:title"/>
+<meta content="grep 与正则表达式" property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://www.danxiaonuo.me/grep-regexp/" property="og:url"/><meta content="https://www.danxiaonuo.me/logo.png" property="og:image"/><meta content="posts" property="article:section"/>
+<meta content="2020-10-01T08:00:00+08:00" property="article:published_time"/>
+<meta content="2020-10-01T08:00:00+08:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://www.danxiaonuo.me/logo.png" name="twitter:image"/>
+<meta content="grep 与正则表达式" name="twitter:title"/>
+<meta content="grep 与正则表达式" name="twitter:description"/>
+<meta content="单小喏" name="application-name"/>
+<meta content="单小喏" name="apple-mobile-web-app-title"/><meta content="#ffffff" name="theme-color"/><meta content="#da532c" name="msapplication-TileColor"/><link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><link color="#5bbad5" href="/safari-pinned-tab.svg" rel="mask-icon"/><link href="/site.webmanifest" rel="manifest"/><link href="https://www.danxiaonuo.me/grep-regexp/" rel="canonical"/><link href="https://www.danxiaonuo.me/linux/" rel="prev"/><link href="https://www.danxiaonuo.me/nano/" rel="next"/><link href="/css/page.min.css" rel="stylesheet"/><link href="/css/home.min.css" rel="stylesheet"/><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "grep 与正则表达式",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.danxiaonuo.me\/grep-regexp\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.danxiaonuo.me\/images\/Apple-Devices-Preview.webp",
+                            "width":  1129 ,
+                            "height":  614 
+                        }],"genre": "posts","keywords": "linux基础","wordcount":  2275 ,
+        "url": "https:\/\/www.danxiaonuo.me\/grep-regexp\/","datePublished": "2020-10-01T08:00:00+08:00","dateModified": "2020-10-01T08:00:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "danxiaonuo","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.danxiaonuo.me\/images\/avatar.png",
+                    "width":  384 ,
+                    "height":  384 
+                }},"author": {
+                "@type": "Person",
+                "name": "单小喏"
+            },"description": "grep 与正则表达式"
+    }
+    </script></head><body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+<div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+<div class="header-wrapper">
+<div class="header-title">
+<a href="/" title="单小喏博客"><span class="header-title-pre"><i class="fas fa-hand-holding-heart fa-fw"></i></span>danxiaonuo</a>
+</div>
+<div class="menu">
+<div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/danxiaonuo" rel="noopener noreffer" target="_blank" title="GitHub"><i class="fab fa-github fa-fw"></i> </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+<input id="search-input-desktop" placeholder="搜索文章标题或内容..." type="text"/>
+<a class="search-button search-toggle" href="#" id="search-toggle-desktop" title="搜索">
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a class="search-button search-clear" href="#" id="search-clear-desktop" title="清空">
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id="search-loading-desktop">
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a class="menu-item theme-switch" href="javascript:void(0);" title="切换主题">
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class="mobile" id="header-mobile">
+<div class="header-container">
+<div class="header-wrapper">
+<div class="header-title">
+<a href="/" title="单小喏博客"><span class="header-title-pre"><i class="fas fa-hand-holding-heart fa-fw"></i></span>danxiaonuo</a>
+</div>
+<div class="menu-toggle" id="menu-toggle-mobile">
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class="menu" id="menu-mobile"><div class="search-wrapper">
+<div class="search mobile" id="search-mobile">
+<input id="search-input-mobile" placeholder="搜索文章标题或内容..." type="text"/>
+<a class="search-button search-toggle" href="#" id="search-toggle-mobile" title="搜索">
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a class="search-button search-clear" href="#" id="search-clear-mobile" title="清空">
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id="search-loading-mobile">
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a class="search-cancel" href="#" id="search-cancel-mobile">
+                        取消
+                    </a>
+</div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/danxiaonuo" rel="noopener noreffer" target="_blank" title="GitHub"><i class="fab fa-github fa-fw"></i></a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+<span> | </span><a class="theme-switch" href="javascript:void(0);" title="切换主题">
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div></div>
+</div>
+</header><div class="search-dropdown desktop">
+<div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+<div id="search-dropdown-mobile"></div>
+</div><main class="main">
+<div class="container"><div class="toc" id="toc-auto">
+<h2 class="toc-title">目录</h2>
+<div class="toc-content" id="toc-content-auto"></div>
+</div><article class="page single" data-toc="enable"><div class="single-card"><h2 class="single-title animated flipInX">grep 与正则表达式</h2><div class="post-meta">
+<div class="post-meta-line"><span class="post-author"><a class="author" href="https://www.danxiaonuo.me" rel="noopener noreffer author" target="_blank" title="Author"><i class="fas fa-user-circle fa-fw"></i>单小喏</a></span> <span class="post-category">出版于  <a href="/categories/%E7%88%B1%E6%8A%80%E6%9C%AF%E7%88%B1%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw"></i>爱技术爱折腾</a></span></div>
+<div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i> <time datetime="2020-10-01">2020-10-01</time></span> <span><i class="fas fa-pencil-alt fa-fw"></i> 约 2275 字</span> 
+                    <span><i class="far fa-clock fa-fw"></i> 预计阅读 5 分钟</span> <span class="leancloud_visitors" data-flag-title="grep 与正则表达式" id="/grep-regexp/">
+<i class="far fa-eye fa-fw"></i> <span class="leancloud-visitors-count"></span> 次阅读
+                        </span> </div>
+</div>
+<hr/><div class="details toc" data-kept="" id="toc-static">
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#grep-典型案例">grep 典型案例</a></li>
+<li><a href="#正则表达式">正则表达式</a></li>
+<li><a href="#ere-和-bre">ERE 和 BRE</a></li>
+<li><a href="#推荐使用-ere">推荐使用 ERE</a></li>
+<li><a href="#grep-ere-语法">grep ERE 语法</a>
+<ul>
+<li><a href="#转义字符">转义字符</a></li>
+<li><a href="#字符集合">字符集合</a></li>
+<li><a href="#数量符">数量符</a></li>
+<li><a href="#锚点">锚点</a></li>
+<li><a href="#分组">分组</a></li>
+<li><a href="#或表达式">或表达式</a></li>
+</ul>
+</li>
+<li><a href="#grep-常用选项">grep 常用选项</a></li>
+<li><a href="#grep-实践">grep 实践</a>
+<ul>
+<li><a href="#文本搜索小游戏">文本搜索小游戏</a></li>
+<li><a href="#文件名搜索">文件名搜索</a></li>
+<li><a href="#查看系统信息并过滤">查看系统信息并过滤</a></li>
+<li><a href="#过滤注释行和空白行">过滤注释行和空白行</a></li>
+<li><a href="#日志搜索">日志搜索</a></li>
+<li><a href="#目录搜索">目录搜索</a></li>
+</ul>
+</li>
+<li><a href="#grep-串联">grep 串联</a></li>
+</ul>
+</nav></div>
+</div><div class="content" id="content"><p>grep 是一款非常流行的文本搜索工具，它根据正则表达式对文本进行搜索，并输出匹配的行或文本。</p>
+<h2 id="grep-典型案例">grep 典型案例</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 查看发行版</span>
+</span></span><span class="line"><span class="cl">cat /etc/os-release <span class="p">|</span> grep <span class="s1">'PRETTY'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看 CPU 型号</span>
+</span></span><span class="line"><span class="cl">cat /proc/cpuinfo <span class="p">|</span> grep <span class="s1">'model name'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看内核参数</span>
+</span></span><span class="line"><span class="cl">sudo sysctl -a <span class="p">|</span> grep <span class="s1">'swap'</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>得到如下输出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell-session" data-lang="shell-session"><span class="line"><span class="cl"><span class="gp">$</span>  <span class="c1"># 查看发行版</span>
+</span></span><span class="line"><span class="cl"><span class="gp">$</span>  cat /etc/os-release <span class="p">|</span> grep <span class="s1">'PRETTY'</span>
+</span></span><span class="line"><span class="cl"><span class="go">PRETTY_NAME="Debian GNU/Linux 10 (buster)"
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  
+</span></span><span class="line"><span class="cl">$  <span class="c1"># 查看 CPU 型号</span>
+</span></span><span class="line"><span class="cl"><span class="gp">$</span>  cat /proc/cpuinfo <span class="p">|</span> grep <span class="s1">'model name'</span>
+</span></span><span class="line"><span class="cl"><span class="go">model name	: Intel(R) Core(TM) i7-5500U CPU @ 2.40GHz
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  
+</span></span><span class="line"><span class="cl">$  <span class="c1"># 查看内核参数</span>
+</span></span><span class="line"><span class="cl"><span class="gp">$</span>  sudo sysctl -a <span class="p">|</span> grep <span class="s1">'swap'</span>
+</span></span><span class="line"><span class="cl"><span class="go">vm.swappiness = 60
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="正则表达式">正则表达式</h2>
+<p><code>grep '.sh'</code> 这个表达式就超出了字面的含义，请看下面这个例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell-session" data-lang="shell-session"><span class="line"><span class="cl"><span class="gp">$</span>  ls -a ~ <span class="p">|</span> grep <span class="s1">'.sh'</span>
+</span></span><span class="line"><span class="cl"><span class="go">.bashrc
+</span></span></span><span class="line"><span class="cl"><span class="go">setup.sh
+</span></span></span><span class="line"><span class="cl"><span class="go">.ssh
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  ls -a ~ <span class="p">|</span> grep <span class="s1">'\.sh'</span>
+</span></span><span class="line"><span class="cl"><span class="go">setup.sh
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>grep 使用正则表达式进行匹配，因为 <code>.</code> 在正则表达式里有特殊含义，它匹配一个任意字符，所以 <code>.ssh</code> <code>.bashrc</code> 文件也匹配到了。</p>
+<p>正则表达式是使用 grep 的基础，它有不同规范，下面将介绍 Linux 中常见的 ERE 和 BRE。</p>
+<h2 id="ere-和-bre">ERE 和 BRE</h2>
+<table>
+<thead>
+<tr>
+<th>简称</th>
+<th>全称</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BRE</td>
+<td>basic regular expressions</td>
+<td>基础正则表达式 (过时的)</td>
+</tr>
+<tr>
+<td>ERE</td>
+<td>extended regular expressions</td>
+<td>扩展正则表达式 (现代的)</td>
+</tr>
+</tbody>
+</table>
+<p>如果从字面理解，基础这个字眼让 BRE 显得具有一定地位，但实质上 BRE 的存在只是为了兼容一些老旧的软件。</p>
+<p>GNU <code>grep</code> 对 BRE 和 ERE 进行了扩展，使得它们之间的差别很小，那就是转义字符的使用:</p>
+<ul>
+<li><code>?</code> <code>+</code> <code>|</code> <code>{</code> <code>}</code> <code>(</code> <code>)</code></li>
+<li><code>\?</code> <code>\+</code> <code>\|</code> <code>\{</code> <code>\}</code> <code>\(</code> <code>\)</code></li>
+</ul>
+<p>BRE 中前者表示字面量，后者具有特殊含义。而 ERE 则相反，前者具有特殊含义，后者表示字面量。例如列出文件名以 <code>config</code> 或者 <code>conf</code> 或者 <code>cfg</code> 结尾的文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 使用 ERE</span>
+</span></span><span class="line"><span class="cl">ls -a <span class="p">|</span> grep -E <span class="s1">'(config|conf|cfg)$'</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用 BRE</span>
+</span></span><span class="line"><span class="cl">ls -a <span class="p">|</span> grep <span class="s1">'\(config\|conf\|cfg\)$'</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>!!! note
+GNU <code>grep</code> 对 BRE 进行了扩展，它并不完全符合 POSIX 规范。在 POSIX 规范中 BRE 不支持 <code>\?</code>、<code>\+</code>、<code>\|</code> 这些元字符。</p>
+<h2 id="推荐使用-ere">推荐使用 ERE</h2>
+<p>ERE 的风格被现代应用程序广泛支持，推荐使用 <strong>ERE</strong>。</p>
+<ul>
+<li><code>grep</code> 默认使用 BRE，<code>grep -E</code> 或者 <code>egrep</code> 使用 ERE</li>
+<li><code>sed</code> 默认使用 BRE，<code>sed -E</code> 使用 ERE</li>
+<li><code>gawk</code> 使用 ERE</li>
+</ul>
+<p><code>egrep</code> 等同于 <code>grep -E</code>，下文将统一使用 <code>egrep</code>。</p>
+<h2 id="grep-ere-语法">grep ERE 语法</h2>
+<h3 id="转义字符">转义字符</h3>
+<p>转义字符 <code>\</code> 指示后面的字符具有特殊含义或者恢复该字符的字面量。本身具有特殊含义的字符前面加 <code>\</code> 则恢复字面量，例如 <code>\.</code>。某些普通字符前面加 <code>\</code> 则具有特殊含义。</p>
+<p><code>\b</code> <code>\B</code> <code>\&lt;</code> <code>\&gt;</code> <code>\s</code> <code>\S</code> <code>\w</code> <code>\W</code> 这些符号具有特殊含义，下面马上就会介绍。POSIX ERE 规范中并不支持这些特殊符号，它们属于 GNU grep 的扩展。</p>
+<h3 id="字符集合">字符集合</h3>
+<p>字符集合匹配一个属于集合中的字符。</p>
+<table>
+<thead>
+<tr>
+<th>字符集合</th>
+<th>描述</th>
+<th>表达式样例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.</code></td>
+<td>匹配一个任意字符，包括换行符。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>[</code> <em>list</em> <code>]</code></td>
+<td>匹配一个在列表中的字符。</td>
+<td><code>[RrB]ose</code> 匹配 “Rose” “rose” “Bose”</td>
+</tr>
+<tr>
+<td><code>[^</code> <em>list</em> <code>]</code></td>
+<td>匹配一个不在列表中的字符。</td>
+<td><code>a[^0-9]c</code> 匹配 “aFc” 不匹配 “a3c”</td>
+</tr>
+<tr>
+<td><code>\s</code></td>
+<td>匹配空白符 (空格、制表符和换行符)。 (GNU 扩展)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>\S</code></td>
+<td>匹配非空白符，与 <code>\s</code> 相反。 (GNU 扩展)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>\w</code></td>
+<td>匹配单词字符 (英文字母或者数字)。 (GNU 扩展)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>\W</code></td>
+<td>匹配非单词字符，与 <code>\w</code> 相反。 (GNU 扩展)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="数量符">数量符</h3>
+<p>数量符限定前面的实例匹配的次数。</p>
+<table>
+<thead>
+<tr>
+<th>数量符</th>
+<th>描述</th>
+<th>表达式样例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*</code></td>
+<td>前面的实例匹配 0 次或多次。</td>
+<td><code>ab*c</code> 匹配 “ac” “abc” “abbc”</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>前面的实例匹配 1 次或多次。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>前面的实例匹配 0 次或 1 次。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>{</code> <em>n</em> <code>}</code></td>
+<td>前面的实例匹配 n 次。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>{</code> <em>n,</em> <code>}</code></td>
+<td>前面的实例匹配 n 次或更多。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>{</code> <em>n</em> <code>,</code> <em>m</em> <code>}</code></td>
+<td>前面的实例匹配大于等于 n 次且小于等于 m 次。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="锚点">锚点</h3>
+<p>锚点匹配一个定位。</p>
+<table>
+<thead>
+<tr>
+<th>锚点</th>
+<th>描述</th>
+<th>表达式样例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>^</code></td>
+<td>匹配一行开头</td>
+<td></td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>匹配一行结尾</td>
+<td></td>
+</tr>
+<tr>
+<td><code>\b</code></td>
+<td>匹配单词边缘。 (GNU 扩展)</td>
+<td><code>good\b</code> 匹配 “good night” 不匹配 “goodbye”</td>
+</tr>
+<tr>
+<td><code>\B</code></td>
+<td>匹配非单词边缘，与 <code>\b</code> 相反。 (GNU 扩展)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>\&lt;</code></td>
+<td>匹配单词开头。 (GNU 扩展)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>\&gt;</code></td>
+<td>匹配单词结尾。 (GNU 扩展)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="分组">分组</h3>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>描述</th>
+<th>表达式样例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>( )</code></td>
+<td>分割一个子表达式</td>
+<td><code>a(bc){3}</code> 匹配 “abcbcbc”</td>
+</tr>
+</tbody>
+</table>
+<h3 id="或表达式">或表达式</h3>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>描述</th>
+<th>表达式样例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`</td>
+<td>`</td>
+<td>匹配任意一个被 `</td>
+</tr>
+</tbody>
+</table>
+<h2 id="grep-常用选项">grep 常用选项</h2>
+<ul>
+<li>-E, –extended-regexp, 使用扩展正则表达式 (ERE)</li>
+<li>-i, –ignore-case, 忽略大小写</li>
+<li>-v, –invert-match, 反选，即选择未匹配的行</li>
+<li>-w, –word-regexp, 单词匹配模式</li>
+<li>-r, –recursive, 递归读取整个目录的文件进行匹配</li>
+<li>-o, –only-matching, 仅打印行中匹配的部分</li>
+<li>-q, –quiet, –silent, 静默模式，一旦发现匹配即退出并返回状态码 <code>0</code></li>
+</ul>
+<h2 id="grep-实践">grep 实践</h2>
+<h3 id="文本搜索小游戏">文本搜索小游戏</h3>
+<p>例如有这样一个文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">I use Linux.
+</span></span><span class="line"><span class="cl">Jack uses macOS.
+</span></span><span class="line"><span class="cl">Most people choose Windows 10.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">["linux", "macos", "win10"]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用 grep 搜索指定的行，得到如下输出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell-session" data-lang="shell-session"><span class="line"><span class="cl"><span class="gp">$</span>  <span class="c1"># 搜索含有 macOS 的行，不区分大小写</span>
+</span></span><span class="line"><span class="cl"><span class="gp">$</span>  egrep -i <span class="s1">'macos'</span> file
+</span></span><span class="line"><span class="cl"><span class="go">Jack uses macOS.
+</span></span></span><span class="line"><span class="cl"><span class="go">["linux", "macos", "win10"]
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  
+</span></span><span class="line"><span class="cl">$  <span class="c1"># 搜索含有 use 的行</span>
+</span></span><span class="line"><span class="cl"><span class="gp">$</span>  egrep <span class="s1">'use'</span> file
+</span></span><span class="line"><span class="cl"><span class="go">I use Linux.
+</span></span></span><span class="line"><span class="cl"><span class="go">Jack uses macOS.
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  
+</span></span><span class="line"><span class="cl">$  <span class="c1"># 搜索含有单词 use 的行</span>
+</span></span><span class="line"><span class="cl"><span class="gp">$</span>  <span class="c1"># 可以使用 \b 界定单词的边缘</span>
+</span></span><span class="line"><span class="cl"><span class="gp">$</span>  egrep <span class="s1">'\buse\b'</span> file
+</span></span><span class="line"><span class="cl"><span class="go">I use Linux.
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  <span class="c1"># 也可以使用 grep -w 单词匹配模式</span>
+</span></span><span class="line"><span class="cl"><span class="gp">$</span>  egrep -w <span class="s1">'use'</span> file
+</span></span><span class="line"><span class="cl"><span class="go">I use Linux.
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  
+</span></span><span class="line"><span class="cl">$  <span class="c1"># 搜索含有 win10 或者 windows 10 或者 windows10 的行，不区分大小写</span>
+</span></span><span class="line"><span class="cl"><span class="gp">$</span>  egrep -i <span class="s1">'(win|windows |windows)10'</span> file
+</span></span><span class="line"><span class="cl"><span class="go">Most people choose Windows 10.
+</span></span></span><span class="line"><span class="cl"><span class="go">["linux", "macos", "win10"]
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  egrep -i <span class="s1">'win(dows ?)?10'</span> file
+</span></span><span class="line"><span class="cl"><span class="go">Most people choose Windows 10.
+</span></span></span><span class="line"><span class="cl"><span class="go">["linux", "macos", "win10"]
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  
+</span></span><span class="line"><span class="cl">$  <span class="c1"># 搜索 windows 后面带有两位数字的行，不区分大小写</span>
+</span></span><span class="line"><span class="cl"><span class="gp">$</span>  egrep -i <span class="s1">'windows ?[0-9]{2}'</span> file
+</span></span><span class="line"><span class="cl"><span class="go">Most people choose Windows 10.
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="文件名搜索">文件名搜索</h3>
+<p>ls 与 grep 配合使用可以帮助我们列出指定类型的文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 列出所有 YAML 文件 (文件名以 .yaml 或者 .yml 结尾)</span>
+</span></span><span class="line"><span class="cl">ls -a <span class="p">|</span> egrep <span class="s1">'\.ya?ml$'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 列出文件名以 config 或者 conf 或者 cfg 结尾的文件</span>
+</span></span><span class="line"><span class="cl">ls -a <span class="p">|</span> egrep <span class="s1">'(config|conf|cfg)$'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 列出所有文件，过滤掉目录</span>
+</span></span><span class="line"><span class="cl">ls -al <span class="p">|</span> egrep <span class="s1">'^-'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 列出 /etc 目录(包括子目录) 下文件名包含 release 的文件</span>
+</span></span><span class="line"><span class="cl">sudo ls -alR /etc <span class="p">|</span> egrep -i <span class="s1">'release'</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="查看系统信息并过滤">查看系统信息并过滤</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 查看 CPU 型号、内核数和线程数</span>
+</span></span><span class="line"><span class="cl">cat /proc/cpuinfo <span class="p">|</span> egrep <span class="s1">'model name|cpu cores|siblings'</span>
+</span></span><span class="line"><span class="cl">cat /proc/cpuinfo <span class="p">|</span> egrep <span class="s1">'model name|cpu cores|siblings'</span> <span class="p">|</span> sort <span class="p">|</span> uniq
+</span></span><span class="line"><span class="cl"><span class="c1"># "| sort | uniq" 排序并去重</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看 /etc/group 并搜索指定组</span>
+</span></span><span class="line"><span class="cl">cat /etc/group <span class="p">|</span> egrep <span class="s1">'^groupname'</span>
+</span></span><span class="line"><span class="cl">cat /etc/group <span class="p">|</span> egrep <span class="s1">'^(sudo|docker)'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看内核参数</span>
+</span></span><span class="line"><span class="cl">sudo sysctl -a <span class="p">|</span> egrep <span class="s1">'swap'</span>
+</span></span><span class="line"><span class="cl">sudo sysctl -a <span class="p">|</span> egrep <span class="s1">'tcp.*control'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 列出所有系统用户</span>
+</span></span><span class="line"><span class="cl">cat /etc/passwd <span class="p">|</span> egrep -o <span class="s1">'^[^:]+'</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="过滤注释行和空白行">过滤注释行和空白行</h3>
+<p>查看配置文件时，为了一目了然，有时需要过滤掉注释行和空白行。假定以 # 开头的行属于注释行，若干空白符加 # 开头的也算。</p>
+<p>正则表达式匹配注释行 <code>^\s*#</code> 和空白行 <code>^\s*$</code>，然后使用 <code>-v</code> 选项反选。合并在一起就是 <code>egrep -v '^\s*(#|$)'</code>，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">egrep -v <span class="s1">'^\s*(#|$)'</span> ~/.profile
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="日志搜索">日志搜索</h3>
+<p>下面是 apache httpd 日志的部分信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">127.0.1.1:80 127.0.0.1 - - [09/Dec/2019:09:21:19 +0800] "GET / HTTP/1.1" ...
+</span></span><span class="line"><span class="cl">127.0.1.1:80 127.0.0.1 - - [09/Dec/2019:10:59:06 +0800] "GET / HTTP/1.1" ...
+</span></span><span class="line"><span class="cl">127.0.1.1:80 127.0.0.1 - - [09/Dec/2019:11:05:08 +0800] "GET / HTTP/1.1" ...
+</span></span><span class="line"><span class="cl">127.0.1.1:80 127.0.0.1 - - [10/Dec/2019:09:02:08 +0800] "GET / HTTP/1.1" ...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>搜索指定时间段的日志：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 搜索某一天的日志egrep '^export EDITOR\b' ~/.profile</span>
+</span></span><span class="line"><span class="cl">egrep <span class="s1">'\[09/Dec/2019:'</span> file
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 搜索某一天 10:00-11:59 之间的日志</span>
+</span></span><span class="line"><span class="cl">egrep <span class="s1">'\[09/Dec/2019:1[0-1]'</span> file
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="目录搜索">目录搜索</h3>
+<p><code>grep -r</code> 会递归读取整个目录进行匹配，下面看几个例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 在 /etc/apt 中搜索 vscode</span>
+</span></span><span class="line"><span class="cl">egrep -i <span class="s1">'vscode'</span> -r /etc/apt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 在内核配置文件中搜索 ipv4</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 搜索范围包括 /etc/sysctl.conf 和 /etc/sysctl.d</span>
+</span></span><span class="line"><span class="cl">egrep -i <span class="s1">'ipv4'</span> -r /etc/sysctl.d /etc/sysctl.conf 
+</span></span><span class="line"><span class="cl"><span class="c1"># 将注释行也过滤掉</span>
+</span></span><span class="line"><span class="cl">egrep -i <span class="s1">'^\s*[^#]*ipv4'</span> -r /etc/sysctl.d /etc/sysctl.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="grep-串联">grep 串联</h2>
+<p>可以将多个 grep 进行串联以代替一个复杂的正则表达式，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 搜索关键字再把注释行去掉</span>
+</span></span><span class="line"><span class="cl">egrep <span class="s1">'ipv4'</span> -r /etc/sysctl.d /etc/sysctl.conf <span class="p">|</span> egrep -v <span class="s1">'^\s*#'</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+<div class="post-info"><div class="post-info-tag"><span><a href="/tags/linux%E5%9F%BA%E7%A1%80/">linux基础</a>
+</span></div><div class="post-info-line"><div class="post-info-mod">
+<span>更新于 2020-10-01</span>
+</div><div class="post-info-mod"><span>
+                         | 
+                        <a class="link-to-markdown" href="https://github.com/khusika/FeelIt/edit/main/exampleSite/content/posts/%e7%88%b1%e6%8a%80%e6%9c%af%e7%88%b1%e6%8a%98%e8%85%be/linux%e5%9f%ba%e7%a1%80/text-sculpting/grep-regexp.md" target="_blank">Improve Article</a>
+</span></div>
+</div><div class="post-info-share">
+<span><a data-hashtags="linux基础" data-sharer="twitter" data-title="grep 与正则表达式" data-url="https://www.danxiaonuo.me/grep-regexp/" href="javascript:void(0);" title="分享到 Twitter"><i class="fab fa-twitter fa-fw"></i></a><a data-hashtag="linux基础" data-sharer="facebook" data-url="https://www.danxiaonuo.me/grep-regexp/" href="javascript:void(0);" title="分享到 Facebook"><i class="fab fa-facebook-square fa-fw"></i></a><a data-sharer="hackernews" data-title="grep 与正则表达式" data-url="https://www.danxiaonuo.me/grep-regexp/" href="javascript:void(0);" title="分享到 Hacker News"><i class="fab fa-hacker-news fa-fw"></i></a><a data-sharer="line" data-title="grep 与正则表达式" data-url="https://www.danxiaonuo.me/grep-regexp/" href="javascript:void(0);" title="分享到 Line"><i class="fab fa-line fa-fw"></i></a><a data-ralateuid="单小喏" data-sharer="weibo" data-title="grep 与正则表达式" data-url="https://www.danxiaonuo.me/grep-regexp/" href="javascript:void(0);" title="分享到 微博"><i class="fab fa-weibo fa-fw"></i></a></span>
+</div></div><div class="post-nav"><a class="prev" href="/linux/" rel="prev" title="Linux 基础组件"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+<a class="next" href="/nano/" rel="next" title="GNU nano">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div class="single-card" id="comments"><div id="valine"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+</main>
+<footer class="footer"><div class="footer-container"><div class="footer-line" itemscope="" itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder"> <a href="https://www.danxiaonuo.me">单小喏</a></span> | <span class="license"><a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license external nofollow noopener noreffer" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('单小喏博客\u00A0Service Worker Registered');
+        }, err => console.error('单小喏博客\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('单小喏博客\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+</div>
+<div id="fixed-buttons"><a class="fixed-button" href="#" id="back-to-top" title="回到顶部">
+<i class="fas fa-chevron-up fa-fw"></i>
+</a><a class="fixed-button" href="#" id="view-comments" title="查看评论">
+<i class="fas fa-comment-alt fa-fw"></i>
+</a></div><link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css" rel="stylesheet"/><link href="/lib/valine/valine.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css" rel="stylesheet"/><script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"WEp2n2R9Mo9oCk4ub38YJdSE-gzGzoHsz","appKey":"rHwb7YxmQvl1ACOt3DK12qTg","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"支持 Markdown 语言, 另外, 填写邮箱后, 会第一时间收到通知邮件呦 🍀","recordIP":true,"serverURLs":"https://www.danxiaonuo.me","visitor":true}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

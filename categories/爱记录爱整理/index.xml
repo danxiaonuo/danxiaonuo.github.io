@@ -1,0 +1,20 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>爱记录爱整理 - 分类 - 单小喏博客</title>
+        <link>https://www.danxiaonuo.me/categories/%E7%88%B1%E8%AE%B0%E5%BD%95%E7%88%B1%E6%95%B4%E7%90%86/</link>
+        <description>爱记录爱整理 - 分类 - 单小喏博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>danxiaonuo@danxiaonuo.me (单小喏)</managingEditor>
+            <webMaster>danxiaonuo@danxiaonuo.me (单小喏)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 20 Mar 2021 08:00:00 &#43;0800</lastBuildDate><atom:link href="https://www.danxiaonuo.me/categories/%E7%88%B1%E8%AE%B0%E5%BD%95%E7%88%B1%E6%95%B4%E7%90%86/" rel="self" type="application/rss+xml" /><item>
+    <title>uola_docker</title>
+    <link>https://www.danxiaonuo.me/uola_docker/</link>
+    <pubDate>Sat, 20 Mar 2021 08:00:00 &#43;0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/uola_docker/</guid>
+    <description><![CDATA[在win平台使用 系统下载地址(包含uola镜像) 点击下载 下载后解压压缩包文件,如下图 需要安装vmware workstation后双击打开 打开]]></description>
+</item>
+<item>
+    <title>Ubuntu 20.10 服务器版安装记录</title>
+    <link>https://www.danxiaonuo.me/ubuntu_install/</link>
+    <pubDate>Fri, 30 Oct 2020 08:00:00 &#43;0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/ubuntu_install/</guid>
+    <description><![CDATA[安装界面 语言选择 键盘选择 IPv4地址设置 IPv6地址设置 保存IP地址设置 代理地址设置 镜像源设置 磁盘设置 删除LV重置 创建分区 创建swap分区 创]]></description>
+</item>
+</channel>
+</rss>

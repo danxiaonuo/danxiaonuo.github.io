@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="noodp" name="robots"/>
+<title>终端和 shell - 单小喏博客</title><meta content="终端和 shell" name="description"/><meta content="终端和 shell" property="og:title"/>
+<meta content="终端和 shell" property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://www.danxiaonuo.me/tty-shell/" property="og:url"/><meta content="https://www.danxiaonuo.me/logo.png" property="og:image"/><meta content="posts" property="article:section"/>
+<meta content="2020-10-01T08:00:00+08:00" property="article:published_time"/>
+<meta content="2020-10-01T08:00:00+08:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://www.danxiaonuo.me/logo.png" name="twitter:image"/>
+<meta content="终端和 shell" name="twitter:title"/>
+<meta content="终端和 shell" name="twitter:description"/>
+<meta content="单小喏" name="application-name"/>
+<meta content="单小喏" name="apple-mobile-web-app-title"/><meta content="#ffffff" name="theme-color"/><meta content="#da532c" name="msapplication-TileColor"/><link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><link color="#5bbad5" href="/safari-pinned-tab.svg" rel="mask-icon"/><link href="/site.webmanifest" rel="manifest"/><link href="https://www.danxiaonuo.me/tty-shell/" rel="canonical"/><link href="https://www.danxiaonuo.me/port-in-use/" rel="prev"/><link href="https://www.danxiaonuo.me/exec-file/" rel="next"/><link href="/css/page.min.css" rel="stylesheet"/><link href="/css/home.min.css" rel="stylesheet"/><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "终端和 shell",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.danxiaonuo.me\/tty-shell\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.danxiaonuo.me\/images\/Apple-Devices-Preview.webp",
+                            "width":  1129 ,
+                            "height":  614 
+                        }],"genre": "posts","keywords": "linux基础","wordcount":  1497 ,
+        "url": "https:\/\/www.danxiaonuo.me\/tty-shell\/","datePublished": "2020-10-01T08:00:00+08:00","dateModified": "2020-10-01T08:00:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "danxiaonuo","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.danxiaonuo.me\/images\/avatar.png",
+                    "width":  384 ,
+                    "height":  384 
+                }},"author": {
+                "@type": "Person",
+                "name": "单小喏"
+            },"description": "终端和 shell"
+    }
+    </script></head><body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+<div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+<div class="header-wrapper">
+<div class="header-title">
+<a href="/" title="单小喏博客"><span class="header-title-pre"><i class="fas fa-hand-holding-heart fa-fw"></i></span>danxiaonuo</a>
+</div>
+<div class="menu">
+<div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/danxiaonuo" rel="noopener noreffer" target="_blank" title="GitHub"><i class="fab fa-github fa-fw"></i> </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+<input id="search-input-desktop" placeholder="搜索文章标题或内容..." type="text"/>
+<a class="search-button search-toggle" href="#" id="search-toggle-desktop" title="搜索">
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a class="search-button search-clear" href="#" id="search-clear-desktop" title="清空">
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id="search-loading-desktop">
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a class="menu-item theme-switch" href="javascript:void(0);" title="切换主题">
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class="mobile" id="header-mobile">
+<div class="header-container">
+<div class="header-wrapper">
+<div class="header-title">
+<a href="/" title="单小喏博客"><span class="header-title-pre"><i class="fas fa-hand-holding-heart fa-fw"></i></span>danxiaonuo</a>
+</div>
+<div class="menu-toggle" id="menu-toggle-mobile">
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class="menu" id="menu-mobile"><div class="search-wrapper">
+<div class="search mobile" id="search-mobile">
+<input id="search-input-mobile" placeholder="搜索文章标题或内容..." type="text"/>
+<a class="search-button search-toggle" href="#" id="search-toggle-mobile" title="搜索">
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a class="search-button search-clear" href="#" id="search-clear-mobile" title="清空">
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id="search-loading-mobile">
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a class="search-cancel" href="#" id="search-cancel-mobile">
+                        取消
+                    </a>
+</div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/danxiaonuo" rel="noopener noreffer" target="_blank" title="GitHub"><i class="fab fa-github fa-fw"></i></a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+<span> | </span><a class="theme-switch" href="javascript:void(0);" title="切换主题">
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div></div>
+</div>
+</header><div class="search-dropdown desktop">
+<div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+<div id="search-dropdown-mobile"></div>
+</div><main class="main">
+<div class="container"><div class="toc" id="toc-auto">
+<h2 class="toc-title">目录</h2>
+<div class="toc-content" id="toc-content-auto"></div>
+</div><article class="page single" data-toc="enable"><div class="single-card"><h2 class="single-title animated flipInX">终端和 shell</h2><div class="post-meta">
+<div class="post-meta-line"><span class="post-author"><a class="author" href="https://www.danxiaonuo.me" rel="noopener noreffer author" target="_blank" title="Author"><i class="fas fa-user-circle fa-fw"></i>单小喏</a></span> <span class="post-category">出版于  <a href="/categories/%E7%88%B1%E6%8A%80%E6%9C%AF%E7%88%B1%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw"></i>爱技术爱折腾</a></span></div>
+<div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i> <time datetime="2020-10-01">2020-10-01</time></span> <span><i class="fas fa-pencil-alt fa-fw"></i> 约 1497 字</span> 
+                    <span><i class="far fa-clock fa-fw"></i> 预计阅读 3 分钟</span> <span class="leancloud_visitors" data-flag-title="终端和 shell" id="/tty-shell/">
+<i class="far fa-eye fa-fw"></i> <span class="leancloud-visitors-count"></span> 次阅读
+                        </span> </div>
+</div>
+<hr/><div class="details toc" data-kept="" id="toc-static">
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#用户界面">用户界面</a>
+<ul>
+<li><a href="#shell">shell</a></li>
+<li><a href="#图形界面">图形界面</a></li>
+</ul>
+</li>
+<li><a href="#终端">终端</a>
+<ul>
+<li><a href="#tty">tty</a></li>
+</ul>
+</li>
+<li><a href="#终端和-shell">终端和 shell</a></li>
+<li><a href="#图形界面使用-shell">图形界面使用 shell</a></li>
+</ul>
+</nav></div>
+</div><div class="content" id="content"><h2 id="用户界面">用户界面</h2>
+<p>对于 Linux 用户来说，最关心的当然是用户界面。用户界面也称为 shell，有「命令行界面」(CLI) 和「图形界面」(GUI)。因为它处在操作系统的最外层，所以称之为 shell (壳)。</p>
+<p>中文环境里面独立出现的 shell 通常特指「命令行 shell」，而不将图形界面称为 shell。Unix-like 操作系统上的「命令行 shell」 又称 “Unix shell”。为了表达简练，后文中单独出现的 shell 特指 “Unix shell”。</p>
+<h3 id="shell">shell</h3>
+<p>shell 既是用户与操作系统交互的界面，也是一门脚本语言，支持交互模式和非交互模式。交互模式下，接收键盘输入的命令。非交互模式下，从文件读取一连串的命令并执行，此文件称为 shell 脚本。</p>
+<p>shell 为 Linux 上面丰富多样的程序提供了用户界面，并且支持组合使用这些程序。使用 shell 脚本，用户可以灵活和高效地完成工作任务。</p>
+<p>此外 shell 还提供了专门为交互使用而设计的功能，包括作业控制、命令行编辑、命令历史记录和命令别名。</p>
+<h3 id="图形界面">图形界面</h3>
+<p>对于 Linux，图形界面是可选的，但它对于操作系统是举足轻重的。</p>
+<p>早期的计算机只有「命令行界面」，那时候计算机是专业人员的工具。图形界面用起来比较舒适，上手容易，它能满足各类人群的需求。可以说图形界面推动了计算机 (包括移动终端) 迅速普及。</p>
+<p>对于使用 shell 工作的人群来说，通过图形界面可以舒适地使用 shell。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">*♥.•´¸.•*´✶´♡ ¸.•*´´♡🌼🍃🌼🍃*
+</span></span><span class="line"><span class="cl">*_🌈○💙_Good morning❤🌹*
+</span></span><span class="line"><span class="cl">*💚.•´¸.•*´✶´♡ ¸.•*´´♡⛅*
+</span></span><span class="line"><span class="cl">*° ☆ ° ˛*˛☆_Π____*。*˚☆*
+</span></span><span class="line"><span class="cl">*˚ ˛★˛•˚ */______/~＼。˚ ˚ ˛*
+</span></span><span class="line"><span class="cl">*˚ ˛•˛• ˚ ｜ 田田 ｜門｜ ˚*
+</span></span><span class="line"><span class="cl">*🌴╬═🌴╬╬🌴╬╬🌴═╬╬═🌴*
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="终端">终端</h2>
+<p>终端 (terminal) 是用户与操作系统用户界面 (shell) 进行交互的设备。早期的计算机终端是一类硬件设备，一台计算机可以连接多个终端机供多个用户使用。</p>
+<p>随着技术的发展，计算机逐渐淘汰了笨重的硬件终端机，取而代之的是软件终端，即虚拟终端。Linux 上与终端相关的术语如下：</p>
+<ul>
+<li>tty - 泛指终端，可以是硬件终端也可以是软件终端。tty 代表 TeleTYpewriter，它曾是早期计算机的硬件终端，Linux 一直沿用这个名字作为终端的代名词。</li>
+<li>pty - 仿真 tty，即仿真终端，也称伪终端。</li>
+<li>ptmx, pts - pty 主端和从端。</li>
+</ul>
+<h3 id="tty">tty</h3>
+<p><code>tty</code> 命令可以查看当前 shell 所属的 tty 信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell-session" data-lang="shell-session"><span class="line"><span class="cl"><span class="gp">$</span>  tty
+</span></span><span class="line"><span class="cl"><span class="go">/dev/pts/2
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面的是在图形界面使用 pty 得到的信息，接下来按 Ctrl + Alt + F5 切换 tty (此 tty 是字符终端)，然后查看 tty：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell-session" data-lang="shell-session"><span class="line"><span class="cl"><span class="gp">$</span>  tty
+</span></span><span class="line"><span class="cl"><span class="go">/dev/tty5
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>以上 <code>/dev/pts/2</code>、<code>/dev/tty5</code> 分别对应不同的 tty：</p>
+<ul>
+<li><code>/dev/ttyN</code> 由操作系统核心组件管理，需要物理线缆连接才可使用，这样的 tty 也称为控制台终端。</li>
+<li><code>/dev/pts/N</code> 由「pty 程序」(比如 GNOME Terminal、SSH) 管理，每建立一个 pty 会话都会创建对应的 pts 文件。</li>
+</ul>
+<p><code>who</code> 可以查看所有登录的用户和对应的 tty：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell-session" data-lang="shell-session"><span class="line"><span class="cl"><span class="gp">$</span>  who
+</span></span><span class="line"><span class="cl"><span class="go">linux-20   tty2         Feb 15 11:14 (tty2)
+</span></span></span><span class="line"><span class="cl"><span class="go">user01     tty5         Feb 16 15:07
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面显示 tty2 和 tty5，新打开的控制台终端对应 tty5 (因为前面使用 Ctrl + Alt + F5 切换，另外用户名和登录时间也可以作为判断依据)，说明原先使用的图形界面对应 tty2，按 Ctrl + Alt + F2 可返回。当图形界面崩溃了可切换到非图形的控制台终端进行诊断。</p>
+<h2 id="终端和-shell">终端和 shell</h2>
+<p>终端和 shell 需要配套使用，打开终端即运行 shell，每个终端都有与之对应的 shell 进程。</p>
+<p>终端负责将输入信息转化为控制序列，shell 负责将控制序列转化为命令。比如我们分别输入 <code>cd /tmp</code> 和 <code># cd /tmp</code>，对终端来说只是输入字符多少的问题，而对 shell 来说则代表完全不同的信息。</p>
+<h2 id="图形界面使用-shell">图形界面使用 shell</h2>
+<p>上面已经说过了，在图形界面中可以通过「pty 程序」(比如 GNOME Terminal) 使用 shell，但是在陌生的图形界面上有时并不容易找到它。「pty 程序」一般包含关键字 “terminal” (终端)，可以通过搜索关键字得到。</p>
+</div><div class="post-footer" id="post-footer">
+<div class="post-info"><div class="post-info-tag"><span><a href="/tags/linux%E5%9F%BA%E7%A1%80/">linux基础</a>
+</span></div><div class="post-info-line"><div class="post-info-mod">
+<span>更新于 2020-10-01</span>
+</div><div class="post-info-mod"><span>
+                         | 
+                        <a class="link-to-markdown" href="https://github.com/khusika/FeelIt/edit/main/exampleSite/content/posts/%e7%88%b1%e6%8a%80%e6%9c%af%e7%88%b1%e6%8a%98%e8%85%be/linux%e5%9f%ba%e7%a1%80/bash/tty-shell.md" target="_blank">Improve Article</a>
+</span></div>
+</div><div class="post-info-share">
+<span><a data-hashtags="linux基础" data-sharer="twitter" data-title="终端和 shell" data-url="https://www.danxiaonuo.me/tty-shell/" href="javascript:void(0);" title="分享到 Twitter"><i class="fab fa-twitter fa-fw"></i></a><a data-hashtag="linux基础" data-sharer="facebook" data-url="https://www.danxiaonuo.me/tty-shell/" href="javascript:void(0);" title="分享到 Facebook"><i class="fab fa-facebook-square fa-fw"></i></a><a data-sharer="hackernews" data-title="终端和 shell" data-url="https://www.danxiaonuo.me/tty-shell/" href="javascript:void(0);" title="分享到 Hacker News"><i class="fab fa-hacker-news fa-fw"></i></a><a data-sharer="line" data-title="终端和 shell" data-url="https://www.danxiaonuo.me/tty-shell/" href="javascript:void(0);" title="分享到 Line"><i class="fab fa-line fa-fw"></i></a><a data-ralateuid="单小喏" data-sharer="weibo" data-title="终端和 shell" data-url="https://www.danxiaonuo.me/tty-shell/" href="javascript:void(0);" title="分享到 微博"><i class="fab fa-weibo fa-fw"></i></a></span>
+</div></div><div class="post-nav"><a class="prev" href="/port-in-use/" rel="prev" title=""><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+<a class="next" href="/exec-file/" rel="next" title="执行文件">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div class="single-card" id="comments"><div id="valine"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+</main>
+<footer class="footer"><div class="footer-container"><div class="footer-line" itemscope="" itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder"> <a href="https://www.danxiaonuo.me">单小喏</a></span> | <span class="license"><a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license external nofollow noopener noreffer" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('单小喏博客\u00A0Service Worker Registered');
+        }, err => console.error('单小喏博客\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('单小喏博客\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+</div>
+<div id="fixed-buttons"><a class="fixed-button" href="#" id="back-to-top" title="回到顶部">
+<i class="fas fa-chevron-up fa-fw"></i>
+</a><a class="fixed-button" href="#" id="view-comments" title="查看评论">
+<i class="fas fa-comment-alt fa-fw"></i>
+</a></div><link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css" rel="stylesheet"/><link href="/lib/valine/valine.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css" rel="stylesheet"/><script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"WEp2n2R9Mo9oCk4ub38YJdSE-gzGzoHsz","appKey":"rHwb7YxmQvl1ACOt3DK12qTg","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"支持 Markdown 语言, 另外, 填写邮箱后, 会第一时间收到通知邮件呦 🍀","recordIP":true,"serverURLs":"https://www.danxiaonuo.me","visitor":true}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

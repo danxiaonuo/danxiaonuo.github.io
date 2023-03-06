@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="noodp" name="robots"/>
+<title>使用 apt 安装软件 - 单小喏博客</title><meta content="使用 apt 安装软件" name="description"/><meta content="使用 apt 安装软件" property="og:title"/>
+<meta content="使用 apt 安装软件" property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://www.danxiaonuo.me/apt/" property="og:url"/><meta content="https://www.danxiaonuo.me/logo.png" property="og:image"/><meta content="posts" property="article:section"/>
+<meta content="2020-10-01T08:00:00+08:00" property="article:published_time"/>
+<meta content="2020-10-01T08:00:00+08:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://www.danxiaonuo.me/logo.png" name="twitter:image"/>
+<meta content="使用 apt 安装软件" name="twitter:title"/>
+<meta content="使用 apt 安装软件" name="twitter:description"/>
+<meta content="单小喏" name="application-name"/>
+<meta content="单小喏" name="apple-mobile-web-app-title"/><meta content="#ffffff" name="theme-color"/><meta content="#da532c" name="msapplication-TileColor"/><link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><link color="#5bbad5" href="/safari-pinned-tab.svg" rel="mask-icon"/><link href="/site.webmanifest" rel="manifest"/><link href="https://www.danxiaonuo.me/apt/" rel="canonical"/><link href="https://www.danxiaonuo.me/iproute2/" rel="prev"/><link href="https://www.danxiaonuo.me/configuration/" rel="next"/><link href="/css/page.min.css" rel="stylesheet"/><link href="/css/home.min.css" rel="stylesheet"/><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "使用 apt 安装软件",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.danxiaonuo.me\/apt\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.danxiaonuo.me\/images\/Apple-Devices-Preview.webp",
+                            "width":  1129 ,
+                            "height":  614 
+                        }],"genre": "posts","keywords": "linux基础","wordcount":  1149 ,
+        "url": "https:\/\/www.danxiaonuo.me\/apt\/","datePublished": "2020-10-01T08:00:00+08:00","dateModified": "2020-10-01T08:00:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "danxiaonuo","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.danxiaonuo.me\/images\/avatar.png",
+                    "width":  384 ,
+                    "height":  384 
+                }},"author": {
+                "@type": "Person",
+                "name": "单小喏"
+            },"description": "使用 apt 安装软件"
+    }
+    </script></head><body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+<div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+<div class="header-wrapper">
+<div class="header-title">
+<a href="/" title="单小喏博客"><span class="header-title-pre"><i class="fas fa-hand-holding-heart fa-fw"></i></span>danxiaonuo</a>
+</div>
+<div class="menu">
+<div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/danxiaonuo" rel="noopener noreffer" target="_blank" title="GitHub"><i class="fab fa-github fa-fw"></i> </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+<input id="search-input-desktop" placeholder="搜索文章标题或内容..." type="text"/>
+<a class="search-button search-toggle" href="#" id="search-toggle-desktop" title="搜索">
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a class="search-button search-clear" href="#" id="search-clear-desktop" title="清空">
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id="search-loading-desktop">
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a class="menu-item theme-switch" href="javascript:void(0);" title="切换主题">
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class="mobile" id="header-mobile">
+<div class="header-container">
+<div class="header-wrapper">
+<div class="header-title">
+<a href="/" title="单小喏博客"><span class="header-title-pre"><i class="fas fa-hand-holding-heart fa-fw"></i></span>danxiaonuo</a>
+</div>
+<div class="menu-toggle" id="menu-toggle-mobile">
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class="menu" id="menu-mobile"><div class="search-wrapper">
+<div class="search mobile" id="search-mobile">
+<input id="search-input-mobile" placeholder="搜索文章标题或内容..." type="text"/>
+<a class="search-button search-toggle" href="#" id="search-toggle-mobile" title="搜索">
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a class="search-button search-clear" href="#" id="search-clear-mobile" title="清空">
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id="search-loading-mobile">
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a class="search-cancel" href="#" id="search-cancel-mobile">
+                        取消
+                    </a>
+</div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/danxiaonuo" rel="noopener noreffer" target="_blank" title="GitHub"><i class="fab fa-github fa-fw"></i></a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+<span> | </span><a class="theme-switch" href="javascript:void(0);" title="切换主题">
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div></div>
+</div>
+</header><div class="search-dropdown desktop">
+<div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+<div id="search-dropdown-mobile"></div>
+</div><main class="main">
+<div class="container"><div class="toc" id="toc-auto">
+<h2 class="toc-title">目录</h2>
+<div class="toc-content" id="toc-content-auto"></div>
+</div><article class="page single" data-toc="enable"><div class="single-card"><h2 class="single-title animated flipInX">使用 apt 安装软件</h2><div class="post-meta">
+<div class="post-meta-line"><span class="post-author"><a class="author" href="https://www.danxiaonuo.me" rel="noopener noreffer author" target="_blank" title="Author"><i class="fas fa-user-circle fa-fw"></i>单小喏</a></span> <span class="post-category">出版于  <a href="/categories/%E7%88%B1%E6%8A%80%E6%9C%AF%E7%88%B1%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw"></i>爱技术爱折腾</a></span></div>
+<div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i> <time datetime="2020-10-01">2020-10-01</time></span> <span><i class="fas fa-pencil-alt fa-fw"></i> 约 1149 字</span> 
+                    <span><i class="far fa-clock fa-fw"></i> 预计阅读 3 分钟</span> <span class="leancloud_visitors" data-flag-title="使用 apt 安装软件" id="/apt/">
+<i class="far fa-eye fa-fw"></i> <span class="leancloud-visitors-count"></span> 次阅读
+                        </span> </div>
+</div>
+<hr/><div class="details toc" data-kept="" id="toc-static">
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#apt-和-dpkg">apt 和 dpkg</a></li>
+<li><a href="#常用示例">常用示例</a>
+<ul>
+<li><a href="#安装-busybox-然后卸载">安装 busybox 然后卸载</a></li>
+<li><a href="#升级所有已安装的软件包">升级所有已安装的软件包</a></li>
+<li><a href="#查看软件包细节">查看软件包细节</a></li>
+</ul>
+</li>
+<li><a href="#apt-常用命令介绍">apt 常用命令介绍</a></li>
+<li><a href="#配置-apt-源">配置 apt 源</a>
+<ul>
+<li><a href="#配置国内镜像源">配置国内镜像源</a>
+<ul>
+<li><a href="#debian-10">Debian 10</a></li>
+<li><a href="#ubuntu-1804">Ubuntu 18.04</a></li>
+</ul>
+</li>
+<li><a href="#添加第三方源">添加第三方源</a></li>
+</ul>
+</li>
+</ul>
+</nav></div>
+</div><div class="content" id="content"><h2 id="apt-和-dpkg">apt 和 dpkg</h2>
+<p>Debian 软件包管理由多个层级组成。底层由 dpkg 和相关程序组成。处在上层的是「apt 系列工具」，例如 apt、apt-get、apt-cache。用户使用最频繁的命令当属 <code>apt</code> 和 <code>dpkg</code>。</p>
+<p>apt 旨在为最终用户提供一种简单有效的处理软件包的方法。它将软件包集中存储在软件仓库，用户可以集中获取软件而无需到分散的站点逐个下载，可以用一条简单的命令批量完成软件的安装、升级和移除。</p>
+<p><code>dpkg</code> 也可用于安装和移除软件包，但是没有 apt 方便。面对 apt 无法胜任的工作，我们才会选择它。</p>
+<h2 id="常用示例">常用示例</h2>
+<h3 id="安装-busybox-然后卸载">安装 busybox 然后卸载</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">sudo apt install busybox
+</span></span><span class="line"><span class="cl">sudo apt remove busybox
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="升级所有已安装的软件包">升级所有已安装的软件包</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">sudo apt upgrade
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="查看软件包细节">查看软件包细节</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">apt show nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="apt-常用命令介绍">apt 常用命令介绍</h2>
+<ul>
+<li><code>update</code> 更新可用软件包列表。</li>
+<li><code>upgrade</code> 升级已安装的软件包，现有软件包不会被删除。</li>
+<li><code>full-upgrade</code> 执行 <code>upgrade</code> 进行升级。此命令进行完整的升级，必要情况下会删除已安装的软件包。</li>
+<li><code>list</code> 根据名称列出软件包。</li>
+<li><code>search</code> 搜索软件包描述。</li>
+<li><code>show</code> 显示软件包细节。</li>
+<li><code>install</code> 安装软件包。</li>
+<li><code>remove</code> 移除软件包。</li>
+<li><code>purge</code> 移除软件包并删除配置文件。</li>
+<li><code>autoremove</code> 卸载所有自动安装且不再使用的软件包。</li>
+</ul>
+<p>!!! note
+<code>upgrade</code> 可升级所有已安装的软件包，即更新操作系统。升级操作系统大版本通常需要删除一些遗弃的软件包，因此需要使用 <code>full-upgrade</code>，例如从 Debian 9 升级到 Debian 10。</p>
+<h2 id="配置-apt-源">配置 apt 源</h2>
+<p>apt 从一个或多个「软件仓库」(源) 下载软件包并将其安装到你的计算机上。源通常是网络服务器，例如官方的 DebianStable 仓库。因为网速问题，我们通常会选择国内的镜像服务器（腾讯软件源、阿里云开源镜像站、清华大学开源软件镜像站），或者使用私有的服务器。</p>
+<h3 id="配置国内镜像源">配置国内镜像源</h3>
+<p>这里以 Debian 10 和 Ubuntu 18.04 为例，其他版本请参考相应的文档：<a href="https://developer.aliyun.com/mirror/" rel="noopener noreffer" target="_blank">https://developer.aliyun.com/mirror/</a></p>
+<h4 id="debian-10">Debian 10</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo tee /etc/apt/sources.list <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">deb https://mirrors.aliyun.com/debian buster main
+</span></span></span><span class="line"><span class="cl"><span class="s">deb-src https://mirrors.aliyun.com/debian buster main
+</span></span></span><span class="line"><span class="cl"><span class="s">deb https://mirrors.aliyun.com/debian-security/ buster/updates main
+</span></span></span><span class="line"><span class="cl"><span class="s">deb-src https://mirrors.aliyun.com/debian-security/ buster/updates main
+</span></span></span><span class="line"><span class="cl"><span class="s">deb https://mirrors.aliyun.com/debian buster-updates main
+</span></span></span><span class="line"><span class="cl"><span class="s">deb-src https://mirrors.aliyun.com/debian buster-updates main
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">sudo apt update
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面的操作可以稍微改进一下，将主机地址和系统版本替换为变量，如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">sHost</span><span class="o">=</span><span class="s2">"mirrors.aliyun.com"</span>
+</span></span><span class="line"><span class="cl"><span class="nv">release</span><span class="o">=</span><span class="s2">"buster"</span>
+</span></span><span class="line"><span class="cl">sudo tee /etc/apt/sources.list <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">deb http://${sHost}/debian ${release} main
+</span></span></span><span class="line"><span class="cl"><span class="s">deb-src http://${sHost}/debian ${release} main
+</span></span></span><span class="line"><span class="cl"><span class="s">deb http://${sHost}/debian-security ${release}/updates main
+</span></span></span><span class="line"><span class="cl"><span class="s">deb-src http://${sHost}/debian-security ${release}/updates main
+</span></span></span><span class="line"><span class="cl"><span class="s">deb http://${sHost}/debian ${release}-updates main
+</span></span></span><span class="line"><span class="cl"><span class="s">deb-src http://${sHost}/debian ${release}-updates main
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">sudo apt update
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="ubuntu-1804">Ubuntu 18.04</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo tee /etc/apt/sources.list <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted
+</span></span></span><span class="line"><span class="cl"><span class="s">deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted
+</span></span></span><span class="line"><span class="cl"><span class="s">deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted
+</span></span></span><span class="line"><span class="cl"><span class="s">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted
+</span></span></span><span class="line"><span class="cl"><span class="s">deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted
+</span></span></span><span class="line"><span class="cl"><span class="s">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">sudo apt update
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>!!! note
+<code>apt update</code> 根据 sources.list 更新可用软件包列表，修改配置文件后执行 update 才能正式生效。用户可以每次安装或升级软件时都执行一次 update，也可以仅在重要的操作前执行。本书其他地方可能会忽略这一步。</p>
+<h3 id="添加第三方源">添加第三方源</h3>
+<p>下面是安装 vscode 的步骤：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 安装 GPG</span>
+</span></span><span class="line"><span class="cl">curl https://packages.microsoft.com/keys/microsoft.asc <span class="p">|</span> gpg --dearmor &gt; packages.microsoft.gpg
+</span></span><span class="line"><span class="cl">sudo install -o root -g root -m <span class="m">644</span> packages.microsoft.gpg /usr/share/keyrings/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 添加源</span>
+</span></span><span class="line"><span class="cl">sudo sh -c <span class="s1">'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" &gt; /etc/apt/sources.list.d/vscode.list'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 更新可用软件包列表</span>
+</span></span><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装 vscode</span>
+</span></span><span class="line"><span class="cl">sudo apt install code
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>第三方软件源可以写入 <code>/etc/apt/sources.list</code>，但更好的安排是在 <code>/etc/apt/sources.list.d</code> 目录下创建一个 list 文件，当不需要时可以删除相应的文件而避免频繁修改一个主配置文件。当 <code>/etc/apt/sources.list.d/vscode.list</code> 被删除后，vscode 仍然可以正常使用，但无法被 <code>apt upgrade</code> 升级。</p>
+</div><div class="post-footer" id="post-footer">
+<div class="post-info"><div class="post-info-tag"><span><a href="/tags/linux%E5%9F%BA%E7%A1%80/">linux基础</a>
+</span></div><div class="post-info-line"><div class="post-info-mod">
+<span>更新于 2020-10-01</span>
+</div><div class="post-info-mod"><span>
+                         | 
+                        <a class="link-to-markdown" href="https://github.com/khusika/FeelIt/edit/main/exampleSite/content/posts/%e7%88%b1%e6%8a%80%e6%9c%af%e7%88%b1%e6%8a%98%e8%85%be/linux%e5%9f%ba%e7%a1%80/package-management/apt.md" target="_blank">Improve Article</a>
+</span></div>
+</div><div class="post-info-share">
+<span><a data-hashtags="linux基础" data-sharer="twitter" data-title="使用 apt 安装软件" data-url="https://www.danxiaonuo.me/apt/" href="javascript:void(0);" title="分享到 Twitter"><i class="fab fa-twitter fa-fw"></i></a><a data-hashtag="linux基础" data-sharer="facebook" data-url="https://www.danxiaonuo.me/apt/" href="javascript:void(0);" title="分享到 Facebook"><i class="fab fa-facebook-square fa-fw"></i></a><a data-sharer="hackernews" data-title="使用 apt 安装软件" data-url="https://www.danxiaonuo.me/apt/" href="javascript:void(0);" title="分享到 Hacker News"><i class="fab fa-hacker-news fa-fw"></i></a><a data-sharer="line" data-title="使用 apt 安装软件" data-url="https://www.danxiaonuo.me/apt/" href="javascript:void(0);" title="分享到 Line"><i class="fab fa-line fa-fw"></i></a><a data-ralateuid="单小喏" data-sharer="weibo" data-title="使用 apt 安装软件" data-url="https://www.danxiaonuo.me/apt/" href="javascript:void(0);" title="分享到 微博"><i class="fab fa-weibo fa-fw"></i></a></span>
+</div></div><div class="post-nav"><a class="prev" href="/iproute2/" rel="prev" title="网络工具 iproute2"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+<a class="next" href="/configuration/" rel="next" title="配置网络">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div class="single-card" id="comments"><div id="valine"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+</main>
+<footer class="footer"><div class="footer-container"><div class="footer-line" itemscope="" itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder"> <a href="https://www.danxiaonuo.me">单小喏</a></span> | <span class="license"><a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license external nofollow noopener noreffer" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('单小喏博客\u00A0Service Worker Registered');
+        }, err => console.error('单小喏博客\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('单小喏博客\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+</div>
+<div id="fixed-buttons"><a class="fixed-button" href="#" id="back-to-top" title="回到顶部">
+<i class="fas fa-chevron-up fa-fw"></i>
+</a><a class="fixed-button" href="#" id="view-comments" title="查看评论">
+<i class="fas fa-comment-alt fa-fw"></i>
+</a></div><link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css" rel="stylesheet"/><link href="/lib/valine/valine.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css" rel="stylesheet"/><script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"WEp2n2R9Mo9oCk4ub38YJdSE-gzGzoHsz","appKey":"rHwb7YxmQvl1ACOt3DK12qTg","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"支持 Markdown 语言, 另外, 填写邮箱后, 会第一时间收到通知邮件呦 🍀","recordIP":true,"serverURLs":"https://www.danxiaonuo.me","visitor":true}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Ubuntu - 标签 - 单小喏博客</title>
+        <link>https://www.danxiaonuo.me/tags/ubuntu/</link>
+        <description>Ubuntu - 标签 - 单小喏博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>danxiaonuo@danxiaonuo.me (单小喏)</managingEditor>
+            <webMaster>danxiaonuo@danxiaonuo.me (单小喏)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 30 Oct 2020 08:00:00 &#43;0800</lastBuildDate><atom:link href="https://www.danxiaonuo.me/tags/ubuntu/" rel="self" type="application/rss+xml" /><item>
+    <title>Ubuntu 20.10 服务器版安装记录</title>
+    <link>https://www.danxiaonuo.me/ubuntu_install/</link>
+    <pubDate>Fri, 30 Oct 2020 08:00:00 &#43;0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/ubuntu_install/</guid>
+    <description><![CDATA[安装界面 语言选择 键盘选择 IPv4地址设置 IPv6地址设置 保存IP地址设置 代理地址设置 镜像源设置 磁盘设置 删除LV重置 创建分区 创建swap分区 创]]></description>
+</item>
+</channel>
+</rss>

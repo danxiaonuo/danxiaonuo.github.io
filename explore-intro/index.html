@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="noodp" name="robots"/>
+<title>查看Pods/Nodes - 单小喏博客</title><meta content="介绍了如何使用kubectl查看和浏览Kubernetes上的节点_容器组_部署等信息_并依据这些信息作出问题诊断" name="description"/><meta content="查看Pods/Nodes" property="og:title"/>
+<meta content="介绍了如何使用kubectl查看和浏览Kubernetes上的节点_容器组_部署等信息_并依据这些信息作出问题诊断" property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://www.danxiaonuo.me/explore-intro/" property="og:url"/><meta content="https://www.danxiaonuo.me/logo.png" property="og:image"/><meta content="posts" property="article:section"/>
+<meta content="2020-11-05T08:00:00+08:00" property="article:published_time"/>
+<meta content="2020-11-05T08:00:00+08:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://www.danxiaonuo.me/logo.png" name="twitter:image"/>
+<meta content="查看Pods/Nodes" name="twitter:title"/>
+<meta content="介绍了如何使用kubectl查看和浏览Kubernetes上的节点_容器组_部署等信息_并依据这些信息作出问题诊断" name="twitter:description"/>
+<meta content="单小喏" name="application-name"/>
+<meta content="单小喏" name="apple-mobile-web-app-title"/><meta content="#ffffff" name="theme-color"/><meta content="#da532c" name="msapplication-TileColor"/><link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><link color="#5bbad5" href="/safari-pinned-tab.svg" rel="mask-icon"/><link href="/site.webmanifest" rel="manifest"/><link href="https://www.danxiaonuo.me/explore-intro/" rel="canonical"/><link href="https://www.danxiaonuo.me/kubernetes-basics/" rel="prev"/><link href="https://www.danxiaonuo.me/deploy-app/" rel="next"/><link href="/css/page.min.css" rel="stylesheet"/><link href="/css/home.min.css" rel="stylesheet"/><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "查看Pods/Nodes",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.danxiaonuo.me\/explore-intro\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.danxiaonuo.me\/images\/Apple-Devices-Preview.webp",
+                            "width":  1129 ,
+                            "height":  614 
+                        }],"genre": "posts","keywords": "k8s, Kubernetes 入门","wordcount":  1711 ,
+        "url": "https:\/\/www.danxiaonuo.me\/explore-intro\/","datePublished": "2020-11-05T08:00:00+08:00","dateModified": "2020-11-05T08:00:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "danxiaonuo","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.danxiaonuo.me\/images\/avatar.png",
+                    "width":  384 ,
+                    "height":  384 
+                }},"author": {
+                "@type": "Person",
+                "name": "单小喏"
+            },"description": "介绍了如何使用kubectl查看和浏览Kubernetes上的节点_容器组_部署等信息_并依据这些信息作出问题诊断"
+    }
+    </script></head><body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+<div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+<div class="header-wrapper">
+<div class="header-title">
+<a href="/" title="单小喏博客"><span class="header-title-pre"><i class="fas fa-hand-holding-heart fa-fw"></i></span>danxiaonuo</a>
+</div>
+<div class="menu">
+<div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/danxiaonuo" rel="noopener noreffer" target="_blank" title="GitHub"><i class="fab fa-github fa-fw"></i> </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+<input id="search-input-desktop" placeholder="搜索文章标题或内容..." type="text"/>
+<a class="search-button search-toggle" href="#" id="search-toggle-desktop" title="搜索">
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a class="search-button search-clear" href="#" id="search-clear-desktop" title="清空">
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id="search-loading-desktop">
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a class="menu-item theme-switch" href="javascript:void(0);" title="切换主题">
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class="mobile" id="header-mobile">
+<div class="header-container">
+<div class="header-wrapper">
+<div class="header-title">
+<a href="/" title="单小喏博客"><span class="header-title-pre"><i class="fas fa-hand-holding-heart fa-fw"></i></span>danxiaonuo</a>
+</div>
+<div class="menu-toggle" id="menu-toggle-mobile">
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class="menu" id="menu-mobile"><div class="search-wrapper">
+<div class="search mobile" id="search-mobile">
+<input id="search-input-mobile" placeholder="搜索文章标题或内容..." type="text"/>
+<a class="search-button search-toggle" href="#" id="search-toggle-mobile" title="搜索">
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a class="search-button search-clear" href="#" id="search-clear-mobile" title="清空">
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id="search-loading-mobile">
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a class="search-cancel" href="#" id="search-cancel-mobile">
+                        取消
+                    </a>
+</div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/danxiaonuo" rel="noopener noreffer" target="_blank" title="GitHub"><i class="fab fa-github fa-fw"></i></a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+<span> | </span><a class="theme-switch" href="javascript:void(0);" title="切换主题">
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div></div>
+</div>
+</header><div class="search-dropdown desktop">
+<div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+<div id="search-dropdown-mobile"></div>
+</div><main class="main">
+<div class="container"><div class="toc" id="toc-auto">
+<h2 class="toc-title">目录</h2>
+<div class="toc-content" id="toc-content-auto"></div>
+</div><article class="page single" data-toc="enable"><div class="single-card"><h2 class="single-title animated flipInX">查看Pods/Nodes</h2><div class="post-meta">
+<div class="post-meta-line"><span class="post-author"><a class="author" href="https://www.danxiaonuo.me" rel="noopener noreffer author" target="_blank" title="Author"><i class="fas fa-user-circle fa-fw"></i>单小喏</a></span> <span class="post-category">出版于  <a href="/categories/%E7%88%B1%E6%8A%80%E6%9C%AF%E7%88%B1%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw"></i>爱技术爱折腾</a></span></div>
+<div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i> <time datetime="2020-11-05">2020-11-05</time></span> <span><i class="fas fa-pencil-alt fa-fw"></i> 约 1711 字</span> 
+                    <span><i class="far fa-clock fa-fw"></i> 预计阅读 4 分钟</span> <span class="leancloud_visitors" data-flag-title="查看Pods/Nodes" id="/explore-intro/">
+<i class="far fa-eye fa-fw"></i> <span class="leancloud-visitors-count"></span> 次阅读
+                        </span> </div>
+</div>
+<hr/><div class="details toc" data-kept="" id="toc-static">
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#目标">目标</a></li>
+<li><a href="#kubernetes-pods">Kubernetes Pods</a></li>
+<li><a href="#pods概述">Pods概述</a></li>
+<li><a href="#node节点">Node（节点）</a></li>
+<li><a href="#实战故障排除">实战：故障排除</a></li>
+</ul>
+</nav></div>
+</div><div class="content" id="content"><adsensetitle></adsensetitle>
+<blockquote>
+<p>参考文档：<a href="https://kubernetes.io/zh/docs/tutorials/kubernetes-basics/explore/explore-intro/" rel="noopener noreffer" target="_blank">查看 pod 和工作节点</a> ，并有所改写。</p>
+</blockquote>
+<h2 id="目标">目标</h2>
+<ul>
+<li>了解Kubernetes Pods（容器组）</li>
+<li>了解Kubernetes Nodes（节点）</li>
+<li>排查故障</li>
+</ul>
+<h2 id="kubernetes-pods">Kubernetes Pods</h2>
+<p>在 <a href="/k8s-basics/deploy-app" rel="">部署第一个应用程序</a> 中创建 Deployment 后，k8s创建了一个 <strong>Pod（容器组）</strong> 来放置应用程序实例（container 容器）。</p>
+<h2 id="pods概述">Pods概述</h2>
+<p><img alt="Pod概念" src="https://cdn.jsdelivr.net/gh/danxiaonuo/blog_resource@main/images/k8s/k8s-basics/explore-intro/module_03_pods.svg" style="border: 1px solid #d7dae2; max-width: 800px;"/></p>
+<p><strong>Pod 容器组</strong> 是一个k8s中一个抽象的概念，用于存放一组 container（可包含一个或多个 container 容器，即图上正方体)，以及这些 container （容器）的一些共享资源。这些资源包括：</p>
+<ul>
+<li>共享存储，称为卷(Volumes)，即图上紫色圆柱</li>
+<li>网络，每个 Pod（容器组）在集群中有个唯一的 IP，pod（容器组）中的 container（容器）共享该IP地址</li>
+<li>container（容器）的基本信息，例如容器的镜像版本，对外暴露的端口等</li>
+</ul>
+<blockquote>
+<p>例如，Pod可能既包含带有Node.js应用程序的 container 容器，也包含另一个非 Node.js 的 container 容器，用于提供 Node.js webserver 要发布的数据。Pod中的容器共享 IP 地址和端口空间（同一 Pod 中的不同 container 端口不能相互冲突），始终位于同一位置并共同调度，并在同一节点上的共享上下文中运行。（同一个Pod内的容器可以使用 localhost + 端口号互相访问）。</p>
+</blockquote>
+<p>Pod（容器组）是 k8s 集群上的最基本的单元。当我们在 k8s 上创建 Deployment 时，会在集群上创建包含容器的 Pod (而不是直接创建容器)。每个Pod都与运行它的 worker 节点（Node）绑定，并保持在那里直到终止或被删除。如果节点（Node）发生故障，则会在群集中的其他可用节点（Node）上运行相同的 Pod（从同样的镜像创建 Container，使用同样的配置，IP 地址不同，Pod 名字不同）。</p>
+<div class="details admonition tip open">
+<div class="details-summary admonition-title">
+<i class="icon fas fa-lightbulb fa-fw"></i>tip<i class="details-icon fas fa-angle-right fa-fw"></i>
+</div>
+<div class="details-content">
+<div class="admonition-content"><p>重要：</p>
+<ul>
+<li>Pod 是一组容器（可包含一个或多个应用程序容器），以及共享存储（卷 Volumes）、IP 地址和有关如何运行容器的信息。</li>
+<li>如果多个容器紧密耦合并且需要共享磁盘等资源，则他们应该被部署在同一个Pod（容器组）中。</li>
+</ul>
+</div>
+</div>
+</div>
+<h2 id="node节点">Node（节点）</h2>
+<p>下图显示一个 Node（节点）上含有4个 Pod（容器组）</p>
+<p><img alt="Kubernetes教程：Node概念" src="https://cdn.jsdelivr.net/gh/danxiaonuo/blog_resource@main/images/k8s/k8s-basics/explore-intro/module_03_nodes.svg" style="border: 1px solid #d7dae2; max-width: 600px;"/></p>
+<p>Pod（容器组）总是在 <strong>Node（节点）</strong> 上运行。Node（节点）是 kubernetes 集群中的计算机，可以是虚拟机或物理机。每个 Node（节点）都由 master 管理。一个 Node（节点）可以有多个Pod（容器组），kubernetes master 会根据每个 Node（节点）上可用资源的情况，自动调度 Pod（容器组）到最佳的 Node（节点）上。</p>
+<p>每个 Kubernetes Node（节点）至少运行：</p>
+<ul>
+<li>Kubelet，负责 master 节点和 worker 节点之间通信的进程；管理 Pod（容器组）和 Pod（容器组）内运行的 Container（容器）。</li>
+<li>容器运行环境（如Docker）负责下载镜像、创建和运行容器等。</li>
+</ul>
+<h2 id="实战故障排除">实战：故障排除</h2>
+<p>在<a href="/k8s-basics/deploy-app" rel="">部署第一个应用程序</a> 中，我们使用了 kubectl 命令行界面部署了 nginx 并且查看了 Deployment 和 Pod。kubectl 还有如下四个常用命令，在我们排查问题时可以提供帮助：</p>
+<ul>
+<li>
+<p><strong>kubectl get</strong> - 显示资源列表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># kubectl get 资源类型</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#获取类型为Deployment的资源列表</span>
+</span></span><span class="line"><span class="cl">kubectl get deployments
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#获取类型为Pod的资源列表</span>
+</span></span><span class="line"><span class="cl">kubectl get pods
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#获取类型为Node的资源列表</span>
+</span></span><span class="line"><span class="cl">kubectl get nodes
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition tip open">
+<div class="details-summary admonition-title">
+<i class="icon fas fa-lightbulb fa-fw"></i>tip<i class="details-icon fas fa-angle-right fa-fw"></i>
+</div>
+<div class="details-content">
+<div class="admonition-content"><p>在命令后增加 <code>-A</code> 或 <code>--all-namespaces</code> 可查看所有 <a href="/k8s-intermediate/obj/namespaces" rel="">名称空间中</a> 的对象，使用参数 <code>-n</code> 可查看指定名称空间的对象，例如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 查看所有名称空间的 Deployment</span>
+</span></span><span class="line"><span class="cl">kubectl get deployments -A
+</span></span><span class="line"><span class="cl">kubectl get deployments --all-namespaces
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看 kube-system 名称空间的 Deployment</span>
+</span></span><span class="line"><span class="cl">kubectl get deployments -n kube-system
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><a href="/k8s-intermediate/obj/namespaces#%e5%b9%b6%e9%9d%9e%e6%89%80%e6%9c%89%e5%af%b9%e8%b1%a1%e9%83%bd%e5%9c%a8%e5%90%8d%e7%a7%b0%e7%a9%ba%e9%97%b4%e9%87%8c" rel="">并非所有对象都在名称空间里</a></p>
+</blockquote>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p><strong>kubectl describe</strong> - 显示有关资源的详细信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># kubectl describe 资源类型 资源名称</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#查看名称为nginx-XXXXXX的Pod的信息</span>
+</span></span><span class="line"><span class="cl">kubectl describe pod nginx-XXXXXX	
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#查看名称为nginx的Deployment的信息</span>
+</span></span><span class="line"><span class="cl">kubectl describe deployment nginx	
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>kubectl logs</strong> - 查看pod中的容器的打印日志（和命令docker logs 类似）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># kubectl logs Pod名称</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#查看名称为nginx-pod-XXXXXXX的Pod内的容器打印的日志</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#本案例中的 nginx-pod 没有输出日志，所以您看到的结果是空的</span>
+</span></span><span class="line"><span class="cl">kubectl logs -f nginx-pod-XXXXXXX
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>kubectl exec</strong> - 在pod中的容器环境内执行命令(和命令docker exec 类似)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># kubectl exec Pod名称 操作命令</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 在名称为nginx-pod-xxxxxx的Pod中运行bash</span>
+</span></span><span class="line"><span class="cl">kubectl <span class="nb">exec</span> -it nginx-pod-xxxxxx -- /bin/bash
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>请尝试在您的集群中执行一下上述的几个命令，了解如何通过 kubectl 操作 kubernetes 集群中的 Node、Pod、Container。</p>
+<div class="details admonition tip open">
+<div class="details-summary admonition-title">
+<i class="icon fas fa-lightbulb fa-fw"></i>tip<i class="details-icon fas fa-angle-right fa-fw"></i>
+</div>
+<div class="details-content">
+<div class="admonition-content">Worker节点是k8s中的工作计算机，可能是VM或物理计算机，具体取决于群集。多个Pod可以在一个节点上运行。</div>
+</div>
+</div>
+</div><div class="post-footer" id="post-footer">
+<div class="post-info"><div class="post-info-tag"><span><a href="/tags/k8s/">k8s</a>
+</span><span><a href="/tags/kubernetes-%E5%85%A5%E9%97%A8/">Kubernetes 入门</a>
+</span></div><div class="post-info-line"><div class="post-info-mod">
+<span>更新于 2020-11-05</span>
+</div><div class="post-info-mod"><span>
+                         | 
+                        <a class="link-to-markdown" href="https://github.com/khusika/FeelIt/edit/main/exampleSite/content/posts/%e7%88%b1%e6%8a%80%e6%9c%af%e7%88%b1%e6%8a%98%e8%85%be/k8s/k8s-basics/explore-intro.md" target="_blank">Improve Article</a>
+</span></div>
+</div><div class="post-info-share">
+<span><a data-hashtags="k8s,Kubernetes 入门" data-sharer="twitter" data-title="查看Pods/Nodes" data-url="https://www.danxiaonuo.me/explore-intro/" href="javascript:void(0);" title="分享到 Twitter"><i class="fab fa-twitter fa-fw"></i></a><a data-hashtag="k8s" data-sharer="facebook" data-url="https://www.danxiaonuo.me/explore-intro/" href="javascript:void(0);" title="分享到 Facebook"><i class="fab fa-facebook-square fa-fw"></i></a><a data-sharer="hackernews" data-title="查看Pods/Nodes" data-url="https://www.danxiaonuo.me/explore-intro/" href="javascript:void(0);" title="分享到 Hacker News"><i class="fab fa-hacker-news fa-fw"></i></a><a data-sharer="line" data-title="查看Pods/Nodes" data-url="https://www.danxiaonuo.me/explore-intro/" href="javascript:void(0);" title="分享到 Line"><i class="fab fa-line fa-fw"></i></a><a data-ralateuid="单小喏" data-sharer="weibo" data-title="查看Pods/Nodes" data-url="https://www.danxiaonuo.me/explore-intro/" href="javascript:void(0);" title="分享到 微博"><i class="fab fa-weibo fa-fw"></i></a></span>
+</div></div><div class="post-nav"><a class="prev" href="/kubernetes-basics/" rel="prev" title="学习Kubernetes基础知识"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+<a class="next" href="/deploy-app/" rel="next" title="部署一个应用程序">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div class="single-card" id="comments"><div id="valine"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+</main>
+<footer class="footer"><div class="footer-container"><div class="footer-line" itemscope="" itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder"> <a href="https://www.danxiaonuo.me">单小喏</a></span> | <span class="license"><a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license external nofollow noopener noreffer" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('单小喏博客\u00A0Service Worker Registered');
+        }, err => console.error('单小喏博客\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('单小喏博客\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+</div>
+<div id="fixed-buttons"><a class="fixed-button" href="#" id="back-to-top" title="回到顶部">
+<i class="fas fa-chevron-up fa-fw"></i>
+</a><a class="fixed-button" href="#" id="view-comments" title="查看评论">
+<i class="fas fa-comment-alt fa-fw"></i>
+</a></div><link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css" rel="stylesheet"/><link href="/lib/valine/valine.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css" rel="stylesheet"/><script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"WEp2n2R9Mo9oCk4ub38YJdSE-gzGzoHsz","appKey":"rHwb7YxmQvl1ACOt3DK12qTg","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"支持 Markdown 语言, 另外, 填写邮箱后, 会第一时间收到通知邮件呦 🍀","recordIP":true,"serverURLs":"https://www.danxiaonuo.me","visitor":true}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

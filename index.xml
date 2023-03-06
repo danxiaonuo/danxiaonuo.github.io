@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>单小喏博客</title>
+<link>https://www.danxiaonuo.me/</link>
+<description>单小喏博客</description>
+<generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>danxiaonuo@danxiaonuo.me (单小喏)</managingEditor>
+<webMaster>danxiaonuo@danxiaonuo.me (单小喏)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 20 Mar 2021 08:00:00 +0800</lastBuildDate>
+<atom:link href="https://www.danxiaonuo.me/index.xml" rel="self" type="application/rss+xml"/>
+<item>
+<title>我最喜欢的歌曲</title>
+<link>https://www.danxiaonuo.me/%E6%88%91%E6%9C%80%E5%96%9C%E6%AC%A2%E7%9A%84%E6%AD%8C%E6%9B%B2/</link>
+<pubDate>Sun, 11 Oct 2020 08:00:00 +0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/%E6%88%91%E6%9C%80%E5%96%9C%E6%AC%A2%E7%9A%84%E6%AD%8C%E6%9B%B2/</guid>
+<description>&lt;div class="featured-image"&gt;
+                &lt;img src="https://cdn.jsdelivr.net/gh/danxiaonuo/blog_resource@main/images/music/music.jpg" referrerpolicy="no-referrer"&gt;
+            &lt;/div&gt;我最喜欢的歌曲</description>
+</item>
+<item>
+<title>k8s学习路径</title>
+<link>https://www.danxiaonuo.me/k8s-summary/</link>
+<pubDate>Thu, 05 Nov 2020 08:00:00 +0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/k8s-summary/</guid>
+<description>&lt;div class="featured-image"&gt;
+                &lt;img src="https://cdn.jsdelivr.net/gh/danxiaonuo/blog_resource@main/images/k8s/k8s.png" referrerpolicy="no-referrer"&gt;
+            &lt;/div&gt;学习路径 Kubernetes 介绍 0. 什么是Kubernetes 1. Kubernetes组件 Kubernetes 入门 0. 学习Kubernetes基础知识 1. 部署一个应用程序 2. 查看 Pods / Nodes 3.</description>
+</item>
+<item>
+<title>uola_docker</title>
+<link>https://www.danxiaonuo.me/uola_docker/</link>
+<pubDate>Sat, 20 Mar 2021 08:00:00 +0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/uola_docker/</guid>
+<description>在win平台使用 系统下载地址(包含uola镜像) 点击下载 下载后解压压缩包文件,如下图 需要安装vmware workstation后双击打开 打开</description>
+</item>
+<item>
+<title>Kubernetes介绍</title>
+<link>https://www.danxiaonuo.me/what-is-k8s/</link>
+<pubDate>Thu, 05 Nov 2020 08:00:00 +0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/what-is-k8s/</guid>
+<description>参考文档： Kubernetes 是什么，并有所改写。 Kubernetes是一个可以移植、可扩展的开源平台，使用 声明式的配置 并依据配置信息自动地执行容器化应用程序</description>
+</item>
+<item>
+<title>Kubernetes组件</title>
+<link>https://www.danxiaonuo.me/component/</link>
+<pubDate>Thu, 05 Nov 2020 08:00:00 +0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/component/</guid>
+<description>参考文档： Kubernetes 组件，并有所改写。 本文档描述了 Kubernetes 的主要组件。 Master组件 Master组件是集群的控制平台（control plane）： master 组件</description>
+</item>
+<item>
+<title>部署一个应用程序</title>
+<link>https://www.danxiaonuo.me/deploy-app/</link>
+<pubDate>Thu, 05 Nov 2020 08:00:00 +0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/deploy-app/</guid>
+<description>Kubernetes 部署 Deployment 译名为 部署。在k8s中，通过发布 Deployment，可以创建应用程序 (docker image) 的实例 (docker container)，这个实例会被包含在称为 Pod 的概</description>
+</item>
+<item>
+<title>查看Pods/Nodes</title>
+<link>https://www.danxiaonuo.me/explore-intro/</link>
+<pubDate>Thu, 05 Nov 2020 08:00:00 +0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/explore-intro/</guid>
+<description>参考文档：查看 pod 和工作节点 ，并有所改写。 目标 了解Kubernetes Pods（容器组） 了解Kubernetes Nodes（节点） 排查故障 Kubernetes Pods</description>
+</item>
+<item>
+<title>学习Kubernetes基础知识</title>
+<link>https://www.danxiaonuo.me/kubernetes-basics/</link>
+<pubDate>Thu, 05 Nov 2020 08:00:00 +0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/kubernetes-basics/</guid>
+<description>参考文档：学习Kubernetes基础知识 ，并有所改写。 学习目标 在k8s集群上部署应用程序 对应用程序进行扩容缩容（多实例） 对应用程序进行版本</description>
+</item>
+<item>
+<title>Ubuntu 20.10 服务器版安装记录</title>
+<link>https://www.danxiaonuo.me/ubuntu_install/</link>
+<pubDate>Fri, 30 Oct 2020 08:00:00 +0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/ubuntu_install/</guid>
+<description>安装界面 语言选择 键盘选择 IPv4地址设置 IPv6地址设置 保存IP地址设置 代理地址设置 镜像源设置 磁盘设置 删除LV重置 创建分区 创建swap分区 创</description>
+</item>
+<item>
+<title>「I/O 流」管道和重定向</title>
+<link>https://www.danxiaonuo.me/shell-redirect/</link>
+<pubDate>Thu, 01 Oct 2020 08:00:00 +0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/shell-redirect/</guid>
+<description>I/O 流 shell 使用 3 种标准「I/O 流」，每种流与一种文件描述符相关联： stdout 是标准输出流，显示来自命令的输出。文件描述符为 1。 stderr 是标准错误流，显示来自命</description>
+</item>
+</channel>
+</rss>

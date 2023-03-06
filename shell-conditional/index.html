@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="noodp" name="robots"/>
+<title>shell 条件语句 - 单小喏博客</title><meta content="shell 条件语句" name="description"/><meta content="shell 条件语句" property="og:title"/>
+<meta content="shell 条件语句" property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://www.danxiaonuo.me/shell-conditional/" property="og:url"/><meta content="https://www.danxiaonuo.me/logo.png" property="og:image"/><meta content="posts" property="article:section"/>
+<meta content="2020-10-01T08:00:00+08:00" property="article:published_time"/>
+<meta content="2020-10-01T08:00:00+08:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://www.danxiaonuo.me/logo.png" name="twitter:image"/>
+<meta content="shell 条件语句" name="twitter:title"/>
+<meta content="shell 条件语句" name="twitter:description"/>
+<meta content="单小喏" name="application-name"/>
+<meta content="单小喏" name="apple-mobile-web-app-title"/><meta content="#ffffff" name="theme-color"/><meta content="#da532c" name="msapplication-TileColor"/><link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><link color="#5bbad5" href="/safari-pinned-tab.svg" rel="mask-icon"/><link href="/site.webmanifest" rel="manifest"/><link href="https://www.danxiaonuo.me/shell-conditional/" rel="canonical"/><link href="https://www.danxiaonuo.me/shell-syntax/" rel="prev"/><link href="https://www.danxiaonuo.me/basic-commands/" rel="next"/><link href="/css/page.min.css" rel="stylesheet"/><link href="/css/home.min.css" rel="stylesheet"/><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "shell 条件语句",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.danxiaonuo.me\/shell-conditional\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.danxiaonuo.me\/images\/Apple-Devices-Preview.webp",
+                            "width":  1129 ,
+                            "height":  614 
+                        }],"genre": "posts","keywords": "linux基础","wordcount":  1133 ,
+        "url": "https:\/\/www.danxiaonuo.me\/shell-conditional\/","datePublished": "2020-10-01T08:00:00+08:00","dateModified": "2020-10-01T08:00:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "danxiaonuo","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.danxiaonuo.me\/images\/avatar.png",
+                    "width":  384 ,
+                    "height":  384 
+                }},"author": {
+                "@type": "Person",
+                "name": "单小喏"
+            },"description": "shell 条件语句"
+    }
+    </script></head><body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+<div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+<div class="header-wrapper">
+<div class="header-title">
+<a href="/" title="单小喏博客"><span class="header-title-pre"><i class="fas fa-hand-holding-heart fa-fw"></i></span>danxiaonuo</a>
+</div>
+<div class="menu">
+<div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/danxiaonuo" rel="noopener noreffer" target="_blank" title="GitHub"><i class="fab fa-github fa-fw"></i> </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+<input id="search-input-desktop" placeholder="搜索文章标题或内容..." type="text"/>
+<a class="search-button search-toggle" href="#" id="search-toggle-desktop" title="搜索">
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a class="search-button search-clear" href="#" id="search-clear-desktop" title="清空">
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id="search-loading-desktop">
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a class="menu-item" href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a><a class="menu-item theme-switch" href="javascript:void(0);" title="切换主题">
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class="mobile" id="header-mobile">
+<div class="header-container">
+<div class="header-wrapper">
+<div class="header-title">
+<a href="/" title="单小喏博客"><span class="header-title-pre"><i class="fas fa-hand-holding-heart fa-fw"></i></span>danxiaonuo</a>
+</div>
+<div class="menu-toggle" id="menu-toggle-mobile">
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class="menu" id="menu-mobile"><div class="search-wrapper">
+<div class="search mobile" id="search-mobile">
+<input id="search-input-mobile" placeholder="搜索文章标题或内容..." type="text"/>
+<a class="search-button search-toggle" href="#" id="search-toggle-mobile" title="搜索">
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a class="search-button search-clear" href="#" id="search-clear-mobile" title="清空">
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id="search-loading-mobile">
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a class="search-cancel" href="#" id="search-cancel-mobile">
+                        取消
+                    </a>
+</div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/danxiaonuo" rel="noopener noreffer" target="_blank" title="GitHub"><i class="fab fa-github fa-fw"></i></a><div class="menu-item"><a href="/index.xml" title="RSS"><i class="fas fa-rss fa-fw" title="RSS"></i> </a>
+<span> | </span><a class="theme-switch" href="javascript:void(0);" title="切换主题">
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div></div>
+</div>
+</header><div class="search-dropdown desktop">
+<div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+<div id="search-dropdown-mobile"></div>
+</div><main class="main">
+<div class="container"><div class="toc" id="toc-auto">
+<h2 class="toc-title">目录</h2>
+<div class="toc-content" id="toc-content-auto"></div>
+</div><article class="page single" data-toc="enable"><div class="single-card"><h2 class="single-title animated flipInX">shell 条件语句</h2><div class="post-meta">
+<div class="post-meta-line"><span class="post-author"><a class="author" href="https://www.danxiaonuo.me" rel="noopener noreffer author" target="_blank" title="Author"><i class="fas fa-user-circle fa-fw"></i>单小喏</a></span> <span class="post-category">出版于  <a href="/categories/%E7%88%B1%E6%8A%80%E6%9C%AF%E7%88%B1%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw"></i>爱技术爱折腾</a></span></div>
+<div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i> <time datetime="2020-10-01">2020-10-01</time></span> <span><i class="fas fa-pencil-alt fa-fw"></i> 约 1133 字</span> 
+                    <span><i class="far fa-clock fa-fw"></i> 预计阅读 3 分钟</span> <span class="leancloud_visitors" data-flag-title="shell 条件语句" id="/shell-conditional/">
+<i class="far fa-eye fa-fw"></i> <span class="leancloud-visitors-count"></span> 次阅读
+                        </span> </div>
+</div>
+<hr/><div class="details toc" data-kept="" id="toc-static">
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#if">if</a></li>
+<li><a href="#常用条件判断">常用条件判断</a></li>
+<li><a href="#条件表达式">条件表达式</a>
+<ul>
+<li><a href="#双方括号--expression-">双方括号 <code>[[ expression ]]</code></a></li>
+<li><a href="#双括号--expression-">双括号 <code>(( expression ))</code></a></li>
+</ul>
+</li>
+<li><a href="#case">case</a></li>
+<li><a href="#select">select</a></li>
+</ul>
+</nav></div>
+</div><div class="content" id="content"><h2 id="if">if</h2>
+<p>if 语句的语法如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="k">if</span> test-commands<span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">  commands...
+</span></span><span class="line"><span class="cl"><span class="k">elif</span> test-commands<span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">  commands...
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl">  commands...
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># elif 是可选的并且可以有多条</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># else 是可选的</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>if 语句在测试命令 <code>test-commands</code> 返回值为零时 (即条件为真时) 执行 <code>then</code> 后面的命令。当所有条件都不满足时，则执行 <code>else</code> 子句。其中 <code>elif</code> 是可选的并且可以有多条，用来提供更多条件测试。<code>else</code> 也是可选的。请看下面的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> -f <span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.bashrc"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">  . <span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.bashrc"</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里使用 if 语句确保文件存在再执行。<code>[ -f "$HOME/.bashrc" ];</code> 这个条件表达式用于判断文件是否存在。<code>. "$HOME/.bashrc"</code> 等同于 <code>source "$HOME/.bashrc"</code>，用于在当前 shell 执行文件。</p>
+<p>借助分号可以将上面的命令写到一行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> -f <span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.bashrc"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> . <span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.bashrc"</span><span class="p">;</span> <span class="k">fi</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="常用条件判断">常用条件判断</h2>
+<ul>
+<li><code>-f file</code> 文件存在且为普通文件。</li>
+<li><code>-d file</code> 文件存在且为目录文件。</li>
+<li><code>-e file</code> 文件存在。</li>
+<li><code>s1 == s2</code> 字符串相等。</li>
+<li><code>s1 != s2</code> 字符串不等。</li>
+<li><code>n1 OP n2</code> 数字比较，OP 可以是这些：<code>-eq</code> <code>-ne</code> <code>-lt</code> <code>-le</code> <code>-gt</code> <code>-ge</code>，分别判断 <code>n1</code> 是否等于、不等于、小于、小于等于、大于、大于等于 <code>n2</code>。</li>
+<li><code>-z string</code> 字符串为空。</li>
+<li><code>-n string</code> 字符串不为空。</li>
+</ul>
+<h2 id="条件表达式">条件表达式</h2>
+<p>常规的条件表达式有两种写法，<code>test expression</code> 和 <code>[ expression ]</code> (方括号里面前后各有一个空格，不能少)。请看下面的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell-session" data-lang="shell-session"><span class="line"><span class="cl"><span class="gp">$</span>  <span class="o">[</span> -d /etc <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl"><span class="go">true
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  <span class="o">[</span> -d /foo <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl"><span class="gp">$</span>  <span class="o">[</span> <span class="m">5</span> -gt <span class="m">3</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl"><span class="go">true
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$USER</span><span class="s2"> </span><span class="k">$(</span>id -u<span class="k">)</span><span class="s2">"</span>
+</span></span><span class="line"><span class="cl"><span class="go">linux-20 1002
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  <span class="o">[</span> <span class="k">$(</span>id -u<span class="k">)</span> -ge <span class="m">1000</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl"><span class="go">true
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  <span class="o">[</span> <span class="nv">$USER</span> !<span class="o">=</span> root <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl"><span class="go">true
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里在条件表达式后面加上 <code>&amp;&amp; echo true</code>，若条件为真则执行 <code>echo</code>，它相当于简短的 if 语句 <code>if [ -d /etc ]; then echo true; fi</code>。</p>
+<p>条件表达式可以进行与或非处理：</p>
+<ul>
+<li><code>[ ! expression ]</code> 否定判断。</li>
+<li><code>[ expression1 -a expression2 ]</code> 两个表达式都为真。</li>
+<li><code>[ expression1 -o expression2 ]</code> 两个表达式中任意一个为真。</li>
+</ul>
+<h3 id="双方括号--expression-">双方括号 <code>[[ expression ]]</code></h3>
+<p>bash 可以用双放括号代替方括号，它提供了增强特性，支持正则表达式，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell-session" data-lang="shell-session"><span class="line"><span class="cl"><span class="gp">$</span>  <span class="o">[[</span> <span class="nv">$USER</span> <span class="o">=</span>~ ^linux <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> hello <span class="nv">$USER</span>
+</span></span><span class="line"><span class="cl"><span class="go">hello linux-20
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>[[ $USER =~ ^linux ]]</code> 如果用户名以 <code>linux</code> 开头则为真。关于正则表达式将在 grep 章节介绍，这里只简单了解一下。</p>
+<h3 id="双括号--expression-">双括号 <code>(( expression ))</code></h3>
+<p>双括号表达式即算术表达式，它有以下特点：</p>
+<ul>
+<li>支持算术运算符。</li>
+<li>支持多个表达式，表达式之间用逗号 <code>,</code> 分开。</li>
+<li>双括号里面调用变量可省略 <code>$</code> 符号。</li>
+<li>双括号里前后的空格可以省略。</li>
+</ul>
+<p>调用算术表达式的结果使用 <code>$(( expression ))</code> 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell-session" data-lang="shell-session"><span class="line"><span class="cl"><span class="gp">$</span>  <span class="nb">echo</span> <span class="k">$((</span><span class="m">3</span> <span class="o">+</span> <span class="m">7</span><span class="k">))</span>, <span class="k">$((</span><span class="m">3</span> <span class="o">*</span> <span class="m">7</span><span class="k">))</span>
+</span></span><span class="line"><span class="cl"><span class="go">10, 21
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  <span class="nv">i</span><span class="o">=</span>1<span class="p">;</span> <span class="o">((</span><span class="nv">i</span><span class="o">=</span>i+5, <span class="nv">i</span><span class="o">=</span>i*2<span class="o">))</span><span class="p">;</span> <span class="nb">echo</span> <span class="nv">$i</span>
+</span></span><span class="line"><span class="cl"><span class="go">12
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  <span class="nv">i</span><span class="o">=</span>1<span class="p">;</span> <span class="o">((</span>i++, i++<span class="o">))</span><span class="p">;</span> <span class="nb">echo</span> <span class="nv">$i</span>
+</span></span><span class="line"><span class="cl"><span class="go">3
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  <span class="nv">i</span><span class="o">=</span>100<span class="p">;</span> <span class="o">((</span><span class="nv">i</span><span class="o">==</span>100<span class="o">))</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl"><span class="go">true
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  <span class="nv">i</span><span class="o">=</span>100<span class="p">;</span> <span class="o">((</span>i&gt;<span class="o">=</span>5<span class="o">))</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl"><span class="go">true
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  <span class="o">((</span><span class="k">$(</span>id -u<span class="k">)</span> !<span class="o">=</span> 0<span class="o">))</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"I am not root"</span>
+</span></span><span class="line"><span class="cl"><span class="go">I am not root
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="case">case</h2>
+<p><code>case</code> 是 if 语句的变种，一般用于对变量进行分类比对，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="si">${</span><span class="nv">LANG</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">2</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">case</span> <span class="si">${</span><span class="nv">LANG</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">2</span><span class="si">}</span> in
+</span></span><span class="line"><span class="cl">  zh<span class="o">)</span> <span class="nv">lang</span><span class="o">=</span>Chinese<span class="p">;;</span>
+</span></span><span class="line"><span class="cl">  en<span class="o">)</span> <span class="nv">lang</span><span class="o">=</span>English<span class="p">;;</span>
+</span></span><span class="line"><span class="cl">  *<span class="o">)</span>  <span class="nv">lang</span><span class="o">=</span>unkown<span class="p">;;</span>
+</span></span><span class="line"><span class="cl"><span class="k">esac</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">"You are using </span><span class="nv">$lang</span><span class="s2">"</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面执行后将得到如下输出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell-session" data-lang="shell-session"><span class="line"><span class="cl"><span class="gp">$</span>  <span class="nb">echo</span> <span class="si">${</span><span class="nv">LANG</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">2</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl"><span class="go">en
+</span></span></span><span class="line"><span class="cl"><span class="go"></span><span class="gp">$</span>  <span class="k">case</span> <span class="si">${</span><span class="nv">LANG</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">2</span><span class="si">}</span> in
+</span></span><span class="line"><span class="cl"><span class="gp">&gt;</span>   zh<span class="o">)</span> <span class="nv">lang</span><span class="o">=</span>Chinese<span class="p">;;</span>
+</span></span><span class="line"><span class="cl"><span class="gp">&gt;</span>   en<span class="o">)</span> <span class="nv">lang</span><span class="o">=</span>English<span class="p">;;</span>
+</span></span><span class="line"><span class="cl"><span class="gp">&gt;</span>   *<span class="o">)</span>  <span class="nv">lang</span><span class="o">=</span>unkown<span class="p">;;</span>
+</span></span><span class="line"><span class="cl"><span class="gp">&gt;</span> <span class="k">esac</span>
+</span></span><span class="line"><span class="cl"><span class="gp">$</span>  <span class="nb">echo</span> <span class="s2">"You are using </span><span class="nv">$lang</span><span class="s2">"</span>
+</span></span><span class="line"><span class="cl"><span class="go">You are using English
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>case</code> 经常用于 shell 脚本的交互设计，根据用户的输入控制脚本的流程，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">echo</span> -n <span class="s2">"Continue [Yes/No]"</span><span class="p">;</span> <span class="nb">read</span> answer
+</span></span><span class="line"><span class="cl"><span class="k">case</span> <span class="nv">$answer</span> in
+</span></span><span class="line"><span class="cl">  y <span class="p">|</span> yes<span class="o">)</span> <span class="nb">echo</span> <span class="s2">"doing something"</span><span class="p">;;</span>
+</span></span><span class="line"><span class="cl">  n <span class="p">|</span> no<span class="o">)</span> <span class="nb">echo</span> <span class="s2">"doing nothing"</span><span class="p">;;</span>
+</span></span><span class="line"><span class="cl">  * <span class="o">)</span> <span class="nb">echo</span> <span class="s2">"unknown answer"</span><span class="p">;;</span>
+</span></span><span class="line"><span class="cl"><span class="k">esac</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="select">select</h2>
+<p><code>select</code> 可用来制作菜单，它经常与 <code>case</code> 配合使用，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma" tabindex="0"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">"Choose a shell: "</span>
+</span></span><span class="line"><span class="cl"><span class="k">select</span> shell in <span class="s2">"ash"</span> <span class="s2">"bash"</span> <span class="s2">"zsh"</span> <span class="s2">"Exit"</span>
+</span></span><span class="line"><span class="cl"><span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="k">case</span> <span class="nv">$shell</span>  in
+</span></span><span class="line"><span class="cl">    ash<span class="o">)</span> <span class="nb">echo</span> <span class="s2">"ash is Almquist shell"</span><span class="p">;;</span>
+</span></span><span class="line"><span class="cl">    bash<span class="o">)</span> <span class="nb">echo</span> <span class="s2">"bash is Bourne-Again shell"</span><span class="p">;;</span>
+</span></span><span class="line"><span class="cl">    zsh<span class="o">)</span> <span class="nb">echo</span> <span class="s2">"zsh is Z shell"</span><span class="p">;;</span>
+</span></span><span class="line"><span class="cl">    Exit<span class="o">)</span> break<span class="p">;;</span>
+</span></span><span class="line"><span class="cl">    *<span class="o">)</span> <span class="nb">echo</span> unkown<span class="p">;;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">esac</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+<div class="post-info"><div class="post-info-tag"><span><a href="/tags/linux%E5%9F%BA%E7%A1%80/">linux基础</a>
+</span></div><div class="post-info-line"><div class="post-info-mod">
+<span>更新于 2020-10-01</span>
+</div><div class="post-info-mod"><span>
+                         | 
+                        <a class="link-to-markdown" href="https://github.com/khusika/FeelIt/edit/main/exampleSite/content/posts/%e7%88%b1%e6%8a%80%e6%9c%af%e7%88%b1%e6%8a%98%e8%85%be/linux%e5%9f%ba%e7%a1%80/bash/shell-conditional.md" target="_blank">Improve Article</a>
+</span></div>
+</div><div class="post-info-share">
+<span><a data-hashtags="linux基础" data-sharer="twitter" data-title="shell 条件语句" data-url="https://www.danxiaonuo.me/shell-conditional/" href="javascript:void(0);" title="分享到 Twitter"><i class="fab fa-twitter fa-fw"></i></a><a data-hashtag="linux基础" data-sharer="facebook" data-url="https://www.danxiaonuo.me/shell-conditional/" href="javascript:void(0);" title="分享到 Facebook"><i class="fab fa-facebook-square fa-fw"></i></a><a data-sharer="hackernews" data-title="shell 条件语句" data-url="https://www.danxiaonuo.me/shell-conditional/" href="javascript:void(0);" title="分享到 Hacker News"><i class="fab fa-hacker-news fa-fw"></i></a><a data-sharer="line" data-title="shell 条件语句" data-url="https://www.danxiaonuo.me/shell-conditional/" href="javascript:void(0);" title="分享到 Line"><i class="fab fa-line fa-fw"></i></a><a data-ralateuid="单小喏" data-sharer="weibo" data-title="shell 条件语句" data-url="https://www.danxiaonuo.me/shell-conditional/" href="javascript:void(0);" title="分享到 微博"><i class="fab fa-weibo fa-fw"></i></a></span>
+</div></div><div class="post-nav"><a class="prev" href="/shell-syntax/" rel="prev" title="shell 语法"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+<a class="next" href="/basic-commands/" rel="next" title="shell 基础命令简介">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div><div class="single-card" id="comments"><div id="valine"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+</main>
+<footer class="footer"><div class="footer-container"><div class="footer-line" itemscope="" itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder"> <a href="https://www.danxiaonuo.me">单小喏</a></span> | <span class="license"><a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license external nofollow noopener noreffer" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('单小喏博客\u00A0Service Worker Registered');
+        }, err => console.error('单小喏博客\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('单小喏博客\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+</div>
+<div id="fixed-buttons"><a class="fixed-button" href="#" id="back-to-top" title="回到顶部">
+<i class="fas fa-chevron-up fa-fw"></i>
+</a><a class="fixed-button" href="#" id="view-comments" title="查看评论">
+<i class="fas fa-comment-alt fa-fw"></i>
+</a></div><link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css" rel="stylesheet"/><link href="/lib/valine/valine.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/css/lightgallery.min.css" rel="stylesheet"/><script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.zh.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.1-beta.0/dist/js/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.3.0/dist/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"WEp2n2R9Mo9oCk4ub38YJdSE-gzGzoHsz","appKey":"rHwb7YxmQvl1ACOt3DK12qTg","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"支持 Markdown 语言, 另外, 填写邮箱后, 会第一时间收到通知邮件呦 🍀","recordIP":true,"serverURLs":"https://www.danxiaonuo.me","visitor":true}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

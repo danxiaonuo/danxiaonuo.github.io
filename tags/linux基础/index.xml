@@ -1,0 +1,68 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>linux基础 - 标签 - 单小喏博客</title>
+        <link>https://www.danxiaonuo.me/tags/linux%E5%9F%BA%E7%A1%80/</link>
+        <description>linux基础 - 标签 - 单小喏博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>danxiaonuo@danxiaonuo.me (单小喏)</managingEditor>
+            <webMaster>danxiaonuo@danxiaonuo.me (单小喏)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 01 Oct 2020 08:00:00 &#43;0800</lastBuildDate><atom:link href="https://www.danxiaonuo.me/tags/linux%E5%9F%BA%E7%A1%80/" rel="self" type="application/rss+xml" /><item>
+    <title>「I/O 流」管道和重定向</title>
+    <link>https://www.danxiaonuo.me/shell-redirect/</link>
+    <pubDate>Thu, 01 Oct 2020 08:00:00 &#43;0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/shell-redirect/</guid>
+    <description><![CDATA[I/O 流 shell 使用 3 种标准「I/O 流」，每种流与一种文件描述符相关联： stdout 是标准输出流，显示来自命令的输出。文件描述符为 1。 stderr 是标准错误流，显示来自命]]></description>
+</item>
+<item>
+    <title>bash 常用快捷键</title>
+    <link>https://www.danxiaonuo.me/shell-shortcuts/</link>
+    <pubDate>Thu, 01 Oct 2020 08:00:00 &#43;0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/shell-shortcuts/</guid>
+    <description><![CDATA[快捷键可以帮助我们轻松操作 shell，例如 Ctrl + A 使光标移动到行首。有时候无意按下一组快捷键却不知情则会很苦恼，例如 Ctrl + S 会暂停终端输出，Ct]]></description>
+</item>
+<item>
+    <title>bash 循环语句</title>
+    <link>https://www.danxiaonuo.me/shell-loop/</link>
+    <pubDate>Thu, 01 Oct 2020 08:00:00 &#43;0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/shell-loop/</guid>
+    <description><![CDATA[下面演示在 bash 中用不同的方法实现 5 次循环： 1 2 3 4 5 6 7 for i in 1 2 3 4 5; do echo $i; done for i in {1..5}; do echo $i; done for i in $(seq 1 5); do echo $i; done for ((i=1; i&lt;=5; i++)); do echo $i; done i=1; while ((i &lt;= 5));]]></description>
+</item>
+<item>
+    <title>chmod 修改文件权限</title>
+    <link>https://www.danxiaonuo.me/chmod/</link>
+    <pubDate>Thu, 01 Oct 2020 08:00:00 &#43;0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/chmod/</guid>
+    <description><![CDATA[chmod - change file mode bits chmod 用于修改文件权限，普通用户可以修改自己的文件权限，root 可以修改任意文件权限。 语法 1 chmod [OPTION]... MODE[,MODE]... FILE... chmod 符号模式 符号模式看上去非常直观]]></description>
+</item>
+<item>
+    <title>chown 修改文件归属</title>
+    <link>https://www.danxiaonuo.me/chown/</link>
+    <pubDate>Thu, 01 Oct 2020 08:00:00 &#43;0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/chown/</guid>
+    <description><![CDATA[chown - change file owner and group chown 用于修改文件归属的用户和组 (owner 和 group)，需要注意： root 用户可以修改文件 owner 和 group。 文件 owner 可以将 group 修改为他所属的任意一个]]></description>
+</item>
+<item>
+    <title>dpkg 管理软件包</title>
+    <link>https://www.danxiaonuo.me/dpkg/</link>
+    <pubDate>Thu, 01 Oct 2020 08:00:00 &#43;0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/dpkg/</guid>
+    <description><![CDATA[安装软件 dpkg 也可用于安装软件，例如安装 chrome 浏览器： 1 2 3 4 5 6 7 8 下载 $ curl -L -o chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 安装 $ sudo dpkg -i chrome.deb 卸载 $ sudo dpkg -r chrome 查看已安装的软件包 dpkg -l 可查看已安装]]></description>
+</item>
+<item>
+    <title>gawk 基础用法</title>
+    <link>https://www.danxiaonuo.me/awk/</link>
+    <pubDate>Thu, 01 Oct 2020 08:00:00 &#43;0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/awk/</guid>
+    <description><![CDATA[awk 是一款用于处理文本的编程语言工具。它提供了比较强大的功能：可以进行正则表达式的匹配，流控制、数学运算符、进程控制语句还有内置的变量和函数。]]></description>
+</item>
+<item>
+    <title>GNU nano</title>
+    <link>https://www.danxiaonuo.me/nano/</link>
+    <pubDate>Thu, 01 Oct 2020 08:00:00 &#43;0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/nano/</guid>
+    <description><![CDATA[流行的命令行文本编辑器有 vim、emacs、nano，其中 vim 和 emacs 具有一定的上手难度同时也更强大。nano 比较小巧并且上手难度低，非常适合轻度]]></description>
+</item>
+<item>
+    <title>grep 与正则表达式</title>
+    <link>https://www.danxiaonuo.me/grep-regexp/</link>
+    <pubDate>Thu, 01 Oct 2020 08:00:00 &#43;0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/grep-regexp/</guid>
+    <description><![CDATA[grep 是一款非常流行的文本搜索工具，它根据正则表达式对文本进行搜索，并输出匹配的行或文本。 grep 典型案例 1 2 3 4 5 6 7 8 # 查看发行版 cat /etc/os-release | grep &#39;PRETTY&#39; # 查看]]></description>
+</item>
+<item>
+    <title>Linux 基础组件</title>
+    <link>https://www.danxiaonuo.me/linux/</link>
+    <pubDate>Thu, 01 Oct 2020 08:00:00 &#43;0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/linux/</guid>
+    <description><![CDATA[Linux 核心的部分是「Linux 内核」，它就像硬壳中的种子一样存在于操作系统中，并且控制着硬件的所有主要功能。内核主要负责内存管理、进程管理、设备]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>docker - 标签 - 单小喏博客</title>
+        <link>https://www.danxiaonuo.me/tags/docker/</link>
+        <description>docker - 标签 - 单小喏博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>danxiaonuo@danxiaonuo.me (单小喏)</managingEditor>
+            <webMaster>danxiaonuo@danxiaonuo.me (单小喏)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 20 Mar 2021 08:00:00 &#43;0800</lastBuildDate><atom:link href="https://www.danxiaonuo.me/tags/docker/" rel="self" type="application/rss+xml" /><item>
+    <title>uola_docker</title>
+    <link>https://www.danxiaonuo.me/uola_docker/</link>
+    <pubDate>Sat, 20 Mar 2021 08:00:00 &#43;0800</pubDate><author>danxiaonuo@danxiaonuo.me (单小喏)</author><guid>https://www.danxiaonuo.me/uola_docker/</guid>
+    <description><![CDATA[在win平台使用 系统下载地址(包含uola镜像) 点击下载 下载后解压压缩包文件,如下图 需要安装vmware workstation后双击打开 打开]]></description>
+</item>
+</channel>
+</rss>
